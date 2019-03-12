@@ -1,0 +1,22 @@
+\section{Introduction}
+\label{sec-intro}
+
+In recent years, visual query answering (\vqa) has received significant attention~\cite{malinowski2015ask,ren2015image,gao2015you} as it involves multi-disciplinary research, \eg natural language understanding, visual information retrieving and multi-modal reasoning. The task of \vqa is to find an answer to a query $\nlq$ based on the content of an image. There are a variety of applications of \vqa, \eg surveillance video understanding, visual commentator robot, \etc. Solving \vqa problems usually requires high level reasoning from the content of an image.
+
+\begin{example}
+ADD AN EXAMPLE!
+\end{example}
+
+
+This example suggests that we leverage graph-based method to resolve the \vqa problem. While to do this, several questions have to be settled. (1) How to represent image and query with graphs? (2) How to infer crucial information when $\eag$ constructed from image is insufficient? (3) How to find answers from graphs with $\eag$? 
+
+
+\vspace{2ex}
+\stitle{Contributions.} In contrast to a majority of deep learning based \vqa techniques, which lacks of necessary reasoning and thus performs poorly, our approach divides \vqa tasks into three parts, and incorporates reinforcement learning and reasoning for each subtask. The main contributions of the paper are as follow.  
+
+(1) We propose new approaches for visual tasks based on reinforcement learning. Given an image and a question, our approach only identifies those objects that are related to users' questions rather than the complete set of objects along with their attributes. This substantially improves performance of object detection 
+
+(2) We propose approaches to answering visual questions with graph-based techniques. More specifically, we first construct an entity-attribute graph from a given image; we then train a classifier to infer missing information that are crucial for answering queries; %As verified in our empirical studies, the classifier is very effective, with accuracy reaching X\%. 
+we finally provide methods to answer queries with graph pattern matching. %To this end, we first transform a natural language query into a pattern query, and then employ matching technique to find answers. 
+
+3) We conduct extensive experimental studies to verify the performance of our method. We find that X, Y, and Z. 

@@ -1,0 +1,100 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{iccv}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
+
+
+% \usepackage{titlesec}
+\newcounter{example}%[section]
+\renewcommand{\theexample}{\arabic{example}}
+\newenvironment{example}{
+        \vspace{1.5ex}
+        \refstepcounter{example}
+        {\noindent\bf Example \theexample:}}{
+        \eop\vspace{1.5ex}}
+
+
+\newcommand{\eat}[1]{}
+\newcommand{\kw}[1]{{\ensuremath {\mathsf{#1}}}\xspace}
+\newcommand{\eop}{\hspace*{\fill}\mbox{$\Box$}}
+\newcommand{\kwlog}{\emph{w.l.o.g.}\xspace}
+\newcommand{\stitle}[1]{\vspace{1.5ex}\noindent{\bf #1}}
+\newcommand{\etitle}[1]{\vspace{0.8ex}\noindent{\underline{\em #1}}}
+\newcommand{\aka}{\emph{a.k.a.}\xspace}
+\newcommand{\gpmm}{\kw{GPM}}
+\newcommand{\vqa}{\kw{VQA}}
+\newcommand{\nlq}{Q_{nl}}
+\newcommand{\eag}{G_{EA}}
+
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+
+% \iccvfinalcopy % *** Uncomment this line for the final submission
+
+\def\iccvPaperID{****} % *** Enter the ICCV Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+\ificcvfinal\pagestyle{empty}\fi
+\begin{document}
+
+%%%%%%%%% TITLE
+\title{Visual Question Answering with Graph Matching and Reasoning}
+
+\author{First Author\\
+Institution1\\
+Institution1 address\\
+{\tt\small firstauthor@i1.org}
+% For a paper whose authors are all at the same institution,
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'',
+% just like the second author.
+% To save space, use either the email address or home page, not both
+\and
+Second Author\\
+Institution2\\
+First line of institution2 address\\
+{\tt\small secondauthor@i2.org}
+}
+
+\maketitle
+%\thispagestyle{empty}
+
+
+%%%%%%%%% ABSTRACT
+\begin{abstract}
+Visual Question Answering (\vqa) is of great significance in offering people convenience: one can raise a question for details of objects, or high-level understanding about the scene, over an image. 
+This paper proposes a novel method to address the \vqa problem. In contrast to prior works, our method that targets single scene \vqa, replies on graph-based techniques and involves reasoning. In a nutshell, our approach is centered on three graphs. The first graph, referred to as inference graph $G_I$, is constructed via learning over labeled data. The other two graphs, referred to as query graph $Q$ and entity-attribute graph $\eag$, are generated from natural language query $\nlq$ and image {\cal I}mg, that are issued from users, respectively. As $\eag$ often does not take sufficient information to answer $Q$, we develop techniques to infer missing information of $\eag$ with $G_I$. Based on $\eag$ and $Q$, we provide techniques to find matches of $Q$ in $\eag$, as the answer of $\nlq$ in {\cal I}mg. Unlike commonly used 
+\vqa methods that are based on end-to-end neural networks, our graph-based method shows well-designed reasoning capability, and thus is highly interpretable. We also create a dataset on soccer match (Soccer-VQA) with rich annotations. The experimental results show that our approach outperforms the state-of-the-art method and has high potential for future investigation.
+\end{abstract}
+
+
+%%%%%%%%% BODY TEXT
+\input{sec-intro}
+\input{sec-related}
+\input{sec-overview}
+\input{sec-obj}
+\input{sec-reasoning}
+\input{sec-expt}
+
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{egbib}
+}
+
+\end{document}

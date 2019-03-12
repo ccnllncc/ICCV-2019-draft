@@ -1,0 +1,43 @@
+\section{Related Work}
+\label{sec-related-work}
+\hspace{-2ex}
+%Traditional approaches to the \vqa problem are mainly neural network based. In contrast, our approach consists of query understanding, query oriented object detection, and query answering. 
+We categorize related work into following three parts. %: visual query answering, visual objects, and graph-based query answering. %\looseness=-1
+
+
+\etitle{Visual query answering}. Current \vqa approaches are mainly based on deep neural works.  \cite{zhu2016visual7w} introduces a spatial attention mechanism similar to the model for image captioning. %In this method, a weight vector is computed and served as an additional input at each time step of the LSTM model. 
+Instead of computing the attention vector iteratively, \cite{xu2016ask} obtains a global spatial attention weights vector which is then used to generate a new image embedding. \cite{zhu2017structured} proposed to model the visual attention as a multivariate distribution over a grid-structured conditional random field on image regions, thus multiple regions can be selected at the same time. This attention mechanism is called structured multivariate attention in~\cite{zhu2017structured}.
+There has been many other improvements to the standard deep learning method, \eg %compared to element-wise product or concatenation of the visual and textual representations,
+\cite{fukui2016multimodal} utilized Multimodal Compact Bilinear (MCB) pooling to efficiently and expressively combine multimodal features. Another interesting idea is the implementation of Neural Module Networks~\cite{Andreas_2016,hu2017learning}, which decomposes queries into their linguistic substructures, and uses these structures to dynamically instantiate module networks. %Question-specific deep network is then assembled from these module networks that each solve one subtask. The layout of module networks can either be constructed from off-the-shelf parses~\cite{Andreas_2016}, or learned from the data~\cite{hu2017learning}.
+\cite{teney2017graph} proposed to build graph over scene objects and question words. The visual graph is similar to ours, but the query graph differs. %\cite{teney2017graph} exploits the grammatical relations between words to generate query graph, while our method applies directed acyclic graph to represent query sentence. 
+Note that the method \cite{teney2017graph} proposed is still a neural network based method as the structured representations are fed into a recurrent network to form the final embedding and the answer is again inferred by a classifier. %In contrast to recent works~\cite{Lu2015, Lu2016Hie}, we focus on single scene and involve reasoning. 
+
+\etitle{Query Oriented Visual Tasks}. {\color{red} Peixi, please add Reinforcement learning based object detection here.} 
+Explores the environment to acquire supervision
+1. Reinforcement driven information acquisition in non-deterministic environments
+2. RL in negvitation
+3. RL in other visual+language field
+
+Reinforcement learning in vqa 
+2. Learning to Reason: End-to-End Module Networks for Visual Question Answering
+Reinforcement learning inference time and accuracy trade-off. Feature based on low, middle and high level makes it better preserves information in the process, and less probability falling into local minimum.
+
+\eat{%20190305
+{Visual Objects Processing}. Visual object detection as well as relationship identification are the preliminary tasks for not only \vqa but also image captioning~\cite{lu2016visual,yao2018exploring,teney2017graph}. %Many works in not in VQA but in image captioning has been done by firstly detect the visual objects~\cite{lu2016visual,yao2018exploring}, and then discover the relationship among them. 
+Other works, \eg~\cite{yao2017boosting}, produce high-level attributes for input images, based on which further processing can be conducted. %These will help model to have a better understanding on properties of different regions/objects. 
+These prior works show that detecting all visual objects, their attributes and relationships is very vital for resolving \vqa problem. %However, these work do not consider the relationship in detail, moreover it is quite hard to demonstrate spatial relationship (\eg close and far) and get relative distance between objects, due to perspective front view of the image.
+%Even though, we  these techniques do not exactly solve the same problem as us, we get inspiration from them that, to explore the relationship between objects or image regions, we first need to detect all visual objects along with relevant attributes.
+}%20190305
+
+
+\etitle{Graph-based query answering}. Query answering has been extensively studied for graph data. In a nutshell, this work includes two aspects: query understanding, and query evaluation. We next review previous work on two aspects. 
+
+\noindent (1) Queries expressed with natural languages are very user-friendly, but nontrivial to understand. Typically, they need to be structured before issuing over \eg search engine, knowledge graph, since structured queries are more expressive. There exist a host of works that based on query logs, human interaction and neural network, respectively. \cite{PoundHIW12} leverages query logs to train a classifier, based on which structured queries are generated.  \cite{ZhengC0YZ17} propose an approach to generate the structured queries through talking between the data (\ie the knowledge graph) and the user. \cite{YihCHG15} introduced how to generate a core inferential chain from a query with convolutional neural networks. As we only cope with a set of fixed queries, hence, we defer
+the topic of query understanding to another paper, and focus primarily on the query evaluation. \looseness=-1
+
+\noindent (2) To evaluate queries on graphs, a typical method is graph pattern matching. There has been a host of work
+on graph pattern matching, \eg techniques for finding exact matches~\cite{cordella2004sub-full,subiso76}, inexact matches~\cite{ZouCO09,TianP08}, and evaluating \kw{SPARQL} queries on \kw{RDF} data~\cite{WagnerTLHS12}. Our work differs from the prior work in the following: (1) we integrate arithmetical and set operations in the query graph, and (2) we develop technique to infer missing values for query answering. \looseness=-1
+
+% \subsection{Outline of the Paper}
+
+% The rest of the paper is organized as follows. Section ~\ref{Preliminary} reviews notions and notations used in the paper. Section~\ref{sec-overview} outlines the framework our approach. Section \ref{sec-understanding} presents core components of our approach, \ie $\kw{VA}$ module (Section ~\ref{Visual Object}), inference module $\kw{IGC}$ (Section ~\ref{Inference}) and $\kw{GM}$ module (Section ~\ref{Query Answering}). Section ~\ref{Experiments} presents our experiments, followed by conclusion in Section ~\ref{Conclusion}.
