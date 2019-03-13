@@ -33,8 +33,12 @@ For notational simplicity, the notation of $\theta_{x_i}|\Pi_i(\mathbf{x})$ is f
 
 With the notations above, the unique joint probability distribution of a Bayesian network (\textit{i.e.}, the inference graph $G_i$) is given by
 \vspace{-1ex}
+
 \begin{equation}\label{eq:BNOri}
-P_\mathfrak{B}(\mathbf{x}) = \prod_{i=1}^{n}\theta_{x_i|\Pi_i(\mathbf{x})}
+P_\mathfrak{B}(X_1, \cdots, X_n) = 
+\prod_{i=1}^{n} P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})=
+\prod_{i=1}^{n} \theta_{X_i | \text{Pa}(X_i)}
+%\theta_{x_1|\text{Pa}_1(\mathbf{x})}\theta_{x_2|\text{Pa}_2(\mathbf{x})}\cdots \theta_{x_n|\text{Pa}_n(\mathbf{x})}
 \end{equation}
 \vspace{-1ex}
 
@@ -43,10 +47,17 @@ In our first problem, the purpose of Bayesian network is to infer the correspond
 The notation of $Y$ is also a random variable associated with our target value with the values $y\in\mathcal{Y}$. 
 In order to take $Y$ into consideration, we rearrange the data $\mathcal{D}$ into another form: $\mathcal{D}=\{(y^{i}, \mathbf{x}^{(i)})\}_{i=1}^N$. Accordingly, Eq.~\eqref{eq:BNOri} is reformulated to the following form 
 \vspace{-1ex}
-\begin{equation}\label{eq:BNWithCls}
-P_\mathfrak{B}(y|\mathbf{x}) = \frac{P_\mathfrak{B}(y,\mathbf{x})}{P_\mathfrak{B}(\mathbf{x})}
-=\frac{ \theta_{y|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y, \Pi_i(\mathbf{x})} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y', \Pi_i(\mathbf{x})} }
-\end{equation}
+\begin{align}\label{eq:BNWithCls}
+\begin{split}
+P_\mathfrak{B}(Y|{X}) & = 
+\frac{ P_\mathfrak{B}(Y) P_\mathfrak{B}({X}|Y) }{P_\mathfrak{B}({X})}\\
+&=\frac{ \theta_{Y|\text{Pa}({X})} \prod_{i=1}^{n} \theta_{X_i|Y, \text{Pa}({X}_i)} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\text{Pa}({X}_0)} \prod_{i=1}^{n} \theta_{X_i|y', \text{Pa}({X}_i)} }
+\end{split}
+\end{align}
+%\begin{equation}\label{eq:BNWithCls}
+%%P_\mathfrak{B}(y|\mathbf{x}) = \frac{P_\mathfrak{B}(y,\mathbf{x})}{P_\mathfrak{B}(\mathbf{x})}
+%%=\frac{ \theta_{y|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y, \Pi_i(\mathbf{x})} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y', \Pi_i(\mathbf{x})} }
+%\end{equation}
 \vspace{-1ex}
 %More theoretical analysis can be found in \cite{koller2009probabilistic}.
 
@@ -65,7 +76,7 @@ To preserve the significance of posterior estimator $P_\mathfrak{B}(y|\mathbf{x}
 Na\"{i}ve Bayes takes the class variables as the root, and all attributes are conditional independent when conditioned on the class \cite{petitjean2018accurate}. This assumption leads to the following form
 \vspace{-1ex}
 \begin{equation}\label{eq:BN-naiveBayes}
-P_\mathfrak{B}(y|\mathbf{x}) \propto \theta_y \prod_{i=1}^{n}\theta_{x_i|y}
+P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
 \vspace{-1ex}
 
