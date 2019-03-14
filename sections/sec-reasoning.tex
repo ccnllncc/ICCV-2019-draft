@@ -1,38 +1,26 @@
 \section{Reasoning}
 \label{sec-reasoning}
 
-An {\em incomplete} \kw{EAG} is often not able to provide query answers due to missing values of some hidden attributes. %After analyzing queries, we observed that identity of person objects are very crucial for answering the queries. Nevertheless, module \kw{VO} is not able to provide identity of person objects in most cases. 
-This motivates us to develop methods to infer values of hidden attributes. % of person objects with extra information.
-Below, we present modules \kw{IGC} and \kw{IM}, which are responsible for inference graph construction and missing value inference, respectively. 
-
-In our model, the inference graph is constructed using the Bayesian network.
-Essentially, Bayesian network is a kind of directed acyclic graph model, of which the parameters can be explicitly represented by the nodes (\textit{i.e.}, random variables).
-Additionally, the parameters can be endowed with distributions (\textit{i.e.}, priors). 
-%Consequently, Bayesian network is quite simple to model, learn and use. 
-%Therefore, Bayesian network 
-%Commonly, Bayesian network is used to optimize decision making for its simplicity to model, learn and use, thus well suites to our two problems at hand.
-Using Bayesian network as inference graph leads to the resulting structure being very concise. %and computationally exploited. 
-%The efficiency of using Bayesian network as a mean of inference has been widely proven and recognized by the community.
 \par
 
 
 \subsection{Inference Graph}
-As mentioned above, the inference graph is constructed using Bayesian network.
-A typical Bayesian network consists of decision and utility nodes \cite{Murphy2001}.
-We follow the descriptive notations used in \cite{koller2009probabilistic} to facilitate our problem.
-%Following theory can be found in many texts that introduce Bayesin network, such as .
-Defined by $\mathcal{D}=\{\mathbf{x}^{(i)}\}_{i=1}^N$ the set of $N$ instances, each instance $\mathbf{x}^{(i)}=[x_1^{(i)}, \cdots, x_n^{(i)}]$ is the observation over $n$ random variables: $x_1\sim X_1$, $\cdots$, $x_n\sim X_n$. 
-Under this assumption, a Bayesian network can be formally described by $\mathfrak{B}=<\mathcal{G},\mathit{\Theta}_\mathcal{G}>$, where $\mathcal{G}$ is a directed acyclic graph and $\mathit{\Theta}_\mathcal{G}$ the set of parameters that can maximize the likelihood \cite{friedman1997bayesian, petitjean2018accurate}. 
-The $i$-th node in $\mathcal{G}$ corresponds to a random variable ${X}_i$, and an edge between two connected nodes indicates the direct dependency. 
-%On the other hand, 
-The symbol of $\mathit{\Theta}_\mathcal{G}$ is a parametric set that uses to quantify the dependencies within $\mathcal{G}$. %the network 
-%For simplicity, t
-Specifically, the parameters set of the $i$-th node associated with an observation $x_i$ in $\mathit{\Theta}_\mathcal{G}$ can be denoted by $\theta_{x_i}|\Pi_i(\mathbf{x})$, where $\Pi_i(\mathbf{x})$ is a function which takes $\mathbf{x}$ as input, and outputs the values of attributes whose child is $i$.
-Note here that ${x_i}$ is a possible value of $X_i$.
-For notational simplicity, the notation of $\theta_{x_i}|\Pi_i(\mathbf{x})$ is fully equal to $\theta_{X_i=x_i}|\Pi_i(\mathbf{x})$.
-
-With the notations above, the unique joint probability distribution of a Bayesian network (\textit{i.e.}, the inference graph $G_i$) is given by
-\vspace{-1ex}
+%As mentioned above, the inference graph is constructed using Bayesian network.
+%A typical Bayesian network consists of decision and utility nodes \cite{Murphy2001}.
+%We follow the descriptive notations used in \cite{koller2009probabilistic} to facilitate our problem.
+%%Following theory can be found in many texts that introduce Bayesin network, such as .
+%Defined by $\mathcal{D}=\{\mathbf{x}^{(i)}\}_{i=1}^N$ the set of $N$ instances, each instance $\mathbf{x}^{(i)}=[x_1^{(i)}, \cdots, x_n^{(i)}]$ is the observation over $n$ random variables: $x_1\sim X_1$, $\cdots$, $x_n\sim X_n$. 
+%Under this assumption, a Bayesian network can be formally described by $\mathfrak{B}=<\mathcal{G},\mathit{\Theta}_\mathcal{G}>$, where $\mathcal{G}$ is a directed acyclic graph and $\mathit{\Theta}_\mathcal{G}$ the set of parameters that can maximize the likelihood \cite{friedman1997bayesian, petitjean2018accurate}. 
+%The $i$-th node in $\mathcal{G}$ corresponds to a random variable ${X}_i$, and an edge between two connected nodes indicates the direct dependency. 
+%%On the other hand, 
+%The symbol of $\mathit{\Theta}_\mathcal{G}$ is a parametric set that uses to quantify the dependencies within $\mathcal{G}$. %the network 
+%%For simplicity, t
+%Specifically, the parameters set of the $i$-th node associated with an observation $x_i$ in $\mathit{\Theta}_\mathcal{G}$ can be denoted by $\theta_{x_i}|\Pi_i(\mathbf{x})$, where $\Pi_i(\mathbf{x})$ is a function which takes $\mathbf{x}$ as input, and outputs the values of attributes whose child is $i$.
+%Note here that ${x_i}$ is a possible value of $X_i$.
+%For notational simplicity, the notation of $\theta_{x_i}|\Pi_i(\mathbf{x})$ is fully equal to $\theta_{X_i=x_i}|\Pi_i(\mathbf{x})$.
+%
+%With the notations above, the unique joint probability distribution of a Bayesian network (\textit{i.e.}, the inference graph $G_i$) is given by
+%\vspace{-1ex}
 
 \begin{equation}\label{eq:BNOri}
 P_\mathfrak{B}(X_1, \cdots, X_n) = 
@@ -43,9 +31,9 @@ P_\mathfrak{B}(X_1, \cdots, X_n) =
 \vspace{-1ex}
 
 %Given the information of a detected person, t
-In our first problem, the purpose of Bayesian network is to infer the corresponding role that can be further regarded as an additional variable, \eg $Y$ (similar handling for the second one). 
-The notation of $Y$ is also a random variable associated with our target value with the values $y\in\mathcal{Y}$. 
-In order to take $Y$ into consideration, we rearrange the data $\mathcal{D}$ into another form: $\mathcal{D}=\{(y^{i}, \mathbf{x}^{(i)})\}_{i=1}^N$. Accordingly, Eq.~\eqref{eq:BNOri} is reformulated to the following form 
+%In our first problem, the purpose of Bayesian network is to infer the corresponding role that can be further regarded as an additional variable, \eg $Y$ (similar handling for the second one). 
+%The notation of $Y$ is also a random variable associated with our target value with the values $y\in\mathcal{Y}$. 
+%In order to take $Y$ into consideration, we rearrange the data $\mathcal{D}$ into another form: $\mathcal{D}=\{(y^{i}, \mathbf{x}^{(i)})\}_{i=1}^N$. Accordingly, Eq.~\eqref{eq:BNOri} is reformulated to the following form 
 \vspace{-1ex}
 \begin{align}\label{eq:BNWithCls}
 \begin{split}
@@ -71,30 +59,30 @@ P_\mathfrak{B}(Y|{X}) & =
 
 
 \subsection{Learning the Inference Graph}
-To preserve the significance of posterior estimator $P_\mathfrak{B}(y|\mathbf{x})$, 
-%all attributes in the class' Markov blanket are required to directly link to the class or its children. 
-Na\"{i}ve Bayes takes the class variables as the root, and all attributes are conditional independent when conditioned on the class \cite{petitjean2018accurate}. This assumption leads to the following form
+%To preserve the significance of posterior estimator $P_\mathfrak{B}(y|\mathbf{x})$, 
+%%all attributes in the class' Markov blanket are required to directly link to the class or its children. 
+%Na\"{i}ve Bayes takes the class variables as the root, and all attributes are conditional independent when conditioned on the class \cite{petitjean2018accurate}. This assumption leads to the following form
 \vspace{-1ex}
 \begin{equation}\label{eq:BN-naiveBayes}
 P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
 \vspace{-1ex}
 
-As can be seen here, Na\"{i}ve Bayes simplifies the structure of Bayesian network. In our proposed model, the structure of Na\"{i}ve Bayes is used to infer %two kinds of information, \textit{i.e.}, 
-the role of detected person.  \looseness=-1 % and the defensive team.
+%As can be seen here, Na\"{i}ve Bayes simplifies the structure of Bayesian network. In our proposed model, the structure of Na\"{i}ve Bayes is used to infer %two kinds of information, \textit{i.e.}, 
+%the role of detected person.  \looseness=-1 % and the defensive team.
+%
+%
+%
+%To graphically and demonstratively infer the role of detected person,  Figure~\ref{fig:inferGraphWorkflow} summarizes the pipeline of inference graph $G_I$, which are composed of two collaborative parts: state extraction (observation) and role probability inference. To be specific, orientation, action, color uniqueness of uniform, as well as field type are firstly employed to describe the state of an unknown candidate, which are then fed into the inference graph to produce the probability of each role. 
+%And the final role is decided based on the maximum probability. \looseness=-1
+%
+%%Using the same handling scheme, we also infer the status of a team. 
+%After inference, one can either use a complete \kw{EAG} to answer queries, or directly apply inference graph to find answers to certain queries (see Section~\ref{Experiments} for an example). 
 
 
-
-To graphically and demonstratively infer the role of detected person,  Figure~\ref{fig:inferGraphWorkflow} summarizes the pipeline of inference graph $G_I$, which are composed of two collaborative parts: state extraction (observation) and role probability inference. To be specific, orientation, action, color uniqueness of uniform, as well as field type are firstly employed to describe the state of an unknown candidate, which are then fed into the inference graph to produce the probability of each role. 
-And the final role is decided based on the maximum probability. \looseness=-1
-
-%Using the same handling scheme, we also infer the status of a team. 
-After inference, one can either use a complete \kw{EAG} to answer queries, or directly apply inference graph to find answers to certain queries (see Section~\ref{Experiments} for an example). 
-
-
-\begin{figure}[tb!]
-\centering
-\includegraphics[width=\columnwidth]{queries.eps}
-\caption{Query graphs}
-\label{fig:queries}
-\end{figure}
+%\begin{figure}[tb!]
+%\centering
+%\includegraphics[width=\columnwidth]{queries.eps}
+%\caption{Query graphs}
+%\label{fig:queries}
+%\end{figure}
