@@ -22,6 +22,13 @@
 %With the notations above, the unique joint probability distribution of a Bayesian network (\textit{i.e.}, the inference graph $G_i$) is given by
 %\vspace{-1ex}
 
+In this section, we briefly introduce the construction of inference graph to infer the hidden attributes.  
+The inference graph is constructed using Bayesian network described by a pair $\mathfrak{B}=<\mathcal{G},\mathit{\Theta}_\mathcal{G}>$. 
+Specifically, the notation $\mathcal{G}$ is a directed acyclic graph, of which the $i$-th vertex corresponds to a random variable $X_i$, and the connected edge in $\mathcal{G}$ between two vertexes indicates the dependency. 
+The second item $\mathit{\Theta}_\mathcal{G}$ is a set of parameters used to quantify the dependencies of $\mathcal{G}$.
+We use the notation $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$ to denote the parameter of $X_i$, of which $\text{Pa}(X_i)$ is the attributes of the parents of $X_i$.
+The joint probability distribution of Bayesian network is given by:
+
 \begin{equation}\label{eq:BNOri}
 P_\mathfrak{B}(X_1, \cdots, X_n) = 
 \prod_{i=1}^{n} P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})=
@@ -30,43 +37,36 @@ P_\mathfrak{B}(X_1, \cdots, X_n) =
 \end{equation}
 \vspace{-1ex}
 
-%Given the information of a detected person, t
-%In our first problem, the purpose of Bayesian network is to infer the corresponding role that can be further regarded as an additional variable, \eg $Y$ (similar handling for the second one). 
-%The notation of $Y$ is also a random variable associated with our target value with the values $y\in\mathcal{Y}$. 
-%In order to take $Y$ into consideration, we rearrange the data $\mathcal{D}$ into another form: $\mathcal{D}=\{(y^{i}, \mathbf{x}^{(i)})\}_{i=1}^N$. Accordingly, Eq.~\eqref{eq:BNOri} is reformulated to the following form 
+%In our inference graph, t
+The role of Bayesian network is to predict the object class when given the attributes $\{X_i\}_{i=1}^n$ as input. In the sense of probability, the object class is also a variable.
+Let $Y=X_0$  be the class variable, the network now has one extra vertex $Y$.
+According to the Bayesian rule, the network can be rewritten as:
+
 \vspace{-1ex}
 \begin{align}\label{eq:BNWithCls}
 \begin{split}
 P_\mathfrak{B}(Y|{X}) & = 
 \frac{ P_\mathfrak{B}(Y) P_\mathfrak{B}({X}|Y) }{P_\mathfrak{B}({X})}\\
-&=\frac{ \theta_{Y|\text{Pa}({X})} \prod_{i=1}^{n} \theta_{X_i|Y, \text{Pa}({X}_i)} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\text{Pa}({X}_0)} \prod_{i=1}^{n} \theta_{X_i|y', \text{Pa}({X}_i)} }
+&=\frac{ \theta_{Y|\text{Pa}({X}_0)} \prod_{i=1}^{n} \theta_{X_i|Y, \text{Pa}({X}_i)} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\text{Pa}({X}_0)} \prod_{i=1}^{n} \theta_{X_i|y', \text{Pa}({X}_i)} }
 \end{split}
 \end{align}
-%\begin{equation}\label{eq:BNWithCls}
-%%P_\mathfrak{B}(y|\mathbf{x}) = \frac{P_\mathfrak{B}(y,\mathbf{x})}{P_\mathfrak{B}(\mathbf{x})}
-%%=\frac{ \theta_{y|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y, \Pi_i(\mathbf{x})} }{ \sum_{y'\in \mathcal{Y}} \theta_{y'|\Pi_i(\mathbf{x})} \prod_{i=1}^{n} \theta_{x_i|y', \Pi_i(\mathbf{x})} }
-%\end{equation}
-\vspace{-1ex}
-%More theoretical analysis can be found in \cite{koller2009probabilistic}.
+%\vspace{-1ex}
+where $\mathcal{Y}$ is the set of class.
+%\begin{figure}[tb]
+%\centering
+%\includegraphics[width=\columnwidth]{inferGraphWorkflow}
+%\caption{The pipeline of inference graph used for inferring the role of a person object.}
+%\vspace{-4ex}
+%\label{fig:inferGraphWorkflow}
+%\end{figure}
 
-\begin{figure}[tb]
-\centering
-\includegraphics[width=\columnwidth]{inferGraphWorkflow}
-\caption{The pipeline of inference graph used for inferring the role of a person object.}
-\vspace{-4ex}
-\label{fig:inferGraphWorkflow}
-\end{figure}
+In the context of Na\"{i}ve Bayes, 
+the significance of $P_\mathfrak{B}(Y|{X})$ is stressed by taking the class variables as the root, and all attributes are conditionally independent when making the class as a condition. As a consequence, the calculation can be simplified as:
 
-
-\subsection{Learning the Inference Graph}
-%To preserve the significance of posterior estimator $P_\mathfrak{B}(y|\mathbf{x})$, 
-%%all attributes in the class' Markov blanket are required to directly link to the class or its children. 
-%Na\"{i}ve Bayes takes the class variables as the root, and all attributes are conditional independent when conditioned on the class \cite{petitjean2018accurate}. This assumption leads to the following form
-\vspace{-1ex}
 \begin{equation}\label{eq:BN-naiveBayes}
 P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
-\vspace{-1ex}
+where $c$ is constant: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
 %As can be seen here, Na\"{i}ve Bayes simplifies the structure of Bayesian network. In our proposed model, the structure of Na\"{i}ve Bayes is used to infer %two kinds of information, \textit{i.e.}, 
 %the role of detected person.  \looseness=-1 % and the defensive team.
