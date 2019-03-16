@@ -1,12 +1,21 @@
 \section{Reasoning}
 \label{sec-reasoning}
 
-In this section, we briefly introduce the construction of inference graph to infer the hidden attributes.  
-The inference graph is constructed using Bayesian network described by a pair $\mathfrak{B}=<\mathcal{G},\mathit{\Theta}_\mathcal{G}>$. 
-Specifically, the notation $\mathcal{G}$ is a directed acyclic graph, of which the $i$-th vertex corresponds to a random variable $X_i$, and the connected edge in $\mathcal{G}$ between two vertexes indicates the dependency. 
-The second item $\mathit{\Theta}_\mathcal{G}$ is a set of parameters used to quantify the dependencies of $\mathcal{G}$.
-We use the notation $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$ to denote the parameter of $X_i$, of which $\text{Pa}(X_i)$ is the attributes of the parents of $X_i$.
-The joint probability distribution of Bayesian network is given by:
+According to our observation,  an {\em incomplete} \kw{EAG} isn't well satisfying of answering the query because of the insufficient attributes.
+To infer the hidden attributes, 
+%In our proposed method, 
+an inference graph is constructed accordingly.  
+we briefly introduce the construction below. 
+
+\subsection{Construction of Inference Graph}
+To take advantage of the prior information and increase the generalization ability of the proposed model, our inference graph is constructed using Bayesian network.
+Mathematically, Bayesian network \cite{friedman1997bayesian} can be described by a pair $\mathfrak{B}=<\mathcal{G},\varTheta_\mathcal{G}>$. 
+Here, the notation $\mathcal{G}$ is a directed acyclic graph, of which the $i$-th vertex corresponds to a random variable $X_i$, and the edge between two connected vertexes indicates the dependency. 
+Additionally, the second item $\varTheta_\mathcal{G}$ is a set of parameters used to quantify the dependencies in $\mathcal{G}$.
+Denoted by $\text{Pa}(X_i)$ the attributes of the parents of $X_i$, 
+the parameter of $X_i$ is represented by  $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$.
+%We use the notation $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$ to denote the parameter of $X_i$, of which $\text{Pa}(X_i)$ is the attributes of the parents of $X_i$.
+With the notations above, the joint probability distribution of Bayesian network is given by:
 
 \begin{equation}\label{eq:BNOri}
 P_\mathfrak{B}(X_1, \cdots, X_n) = 
@@ -16,9 +25,9 @@ P_\mathfrak{B}(X_1, \cdots, X_n) =
 \end{equation}
 \vspace{-1ex}
 
-In our inference graph, the role of Bayesian network is to predict the object class when given the attributes $\{X_i\}_{i=1}^n$ as input. In the sense of probability, the object class is also a variable.
-Let $Y=X_0$  be the class variable, the network now has one extra vertex $Y$.
-According to the Bayesian rule, the network can be rewritten as:
+In our inference graph, the role of Bayesian network is to predict the object class when given the attributes $\{X_i\}_{i=1}^n$ as input. In the sense of probability, the object class is also a variable \cite{koller2009probabilistic}.
+Defined by $X_0=Y$ the class variable, the network now has one extra vertex $X_0$.
+In order to infer the class attribute, and according to the Bayesian rule, the target network is given by:
 
 \vspace{-1ex}
 \begin{align}\label{eq:BNWithCls}
@@ -38,13 +47,17 @@ where $\mathcal{Y}$ is the set of classes.
 %\label{fig:inferGraphWorkflow}
 %\end{figure}
 
+\subsection{Structure Learning of the Inference Graph}
+
 In the context of Na\"{i}ve Bayes, 
-the importance of $P_\mathfrak{B}(Y|{X})$ is stressed by taking the class variable as the root, and all attributes are conditionally independent when taking the class as a condition. As a consequence, the calculation can be simplified as:
+the structure of $P_\mathfrak{B}(Y|{X})$ is simplified by taking the class variable as the root, and all attributes are conditionally independent when taking the class as a condition \cite{petitjean2018accurate}. As a consequence, the attribute class can be explicitly inferred by:
 
 \begin{equation}\label{eq:BN-naiveBayes}
 P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
-where $c$ is used to make the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
+where $c$ is a constant that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
+
+Note from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
 
 %\begin{figure}[tb!]
 %\centering

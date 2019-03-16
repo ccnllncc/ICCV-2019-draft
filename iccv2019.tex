@@ -13,6 +13,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{multirow}
+\usepackage{bbm}
 
 
 % \usepackage{titlesec}
@@ -79,20 +80,30 @@ First line of institution2 address\\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-%Visual Question Answering (\vqa) is of great significance in offering people convenience: one can raise a question for details of objects, or high-level understanding about the scene, over an image. 
-%This paper proposes a novel method to address the \vqa problem. In contrast to prior works, our method that targets single scene \vqa, replies on graph-based techniques and involves reasoning. In a nutshell, our approach is centered on three graphs. The first graph, referred to as inference graph $G_I$, is constructed via learning over labeled data. The other two graphs, referred to as query graph $Q$ and entity-attribute graph $\eag$, are generated from natural language query $\nlq$ and image {\cal I}mg, that are issued from users, respectively. As $\eag$ often does not take sufficient information to answer $Q$, we develop techniques to infer missing information of $\eag$ with $G_I$. Based on $\eag$ and $Q$, we provide techniques to find matches of $Q$ in $\eag$, as the answer of $\nlq$ in {\cal I}mg. Unlike commonly used 
-%\vqa methods that are based on end-to-end neural networks, our graph-based method shows well-designed reasoning capability, and thus is highly interpretable. We also create a dataset on soccer match (Soccer-VQA) with rich annotations. The experimental results show that our approach outperforms the state-of-the-art method and has high potential for future investigation.
-xxx.
+Visual Question Answering (\vqa) is of great significance in offering people convenience: one can raise a question for details of objects, or high-level understanding about the scene, over an image. 
+This paper proposes a novel method to address the \vqa problem. In contrast to prior works, our method that targets single scene \vqa, replies on graph-based techniques and involves reasoning. In a nutshell, our approach is centered on three graphs. The first graph, referred to as inference graph $G_I$, is constructed via learning over labeled data. The other two graphs, referred to as query graph $Q$ and entity-attribute graph $\eag$, are generated from natural language query $\nlq$ and image {\cal I}mg, that are issued from users, respectively. As $\eag$ often does not take sufficient information to answer $Q$, we develop techniques to infer missing information of $\eag$ with $G_I$. Based on $\eag$ and $Q$, we provide techniques to find matches of $Q$ in $\eag$, as the answer of $\nlq$ in {\cal I}mg. Unlike commonly used 
+\vqa methods that are based on end-to-end neural networks, our graph-based method shows well-designed reasoning capability, and thus is highly interpretable. We also create a dataset on soccer match (Soccer-VQA) with rich annotations. The experimental results show that our approach outperforms the state-of-the-art method and has high potential for future investigation.
 \end{abstract}
 
 
 %%%%%%%%% BODY TEXT
-%\input{sections/sec-intro}
-%\input{sections/sec-related}
-%\input{sections/sec-overview}
-%\input{sections/sec-obj}
+% unchanged
+\input{sections/sec-intro}
+
+% change one paragraph
+\input{sections/sec-related}
+
+% unchanged
+\input{sections/sec-overview}
+
+% changed
+\input{sections/sec-obj}
+
+% changed
 \input{sections/sec-reasoning}
-%\input{sections/sec-expt}
+
+% small change
+\input{sections/sec-expt}
 
 
 

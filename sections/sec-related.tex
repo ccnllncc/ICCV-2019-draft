@@ -12,15 +12,8 @@ There has been many other improvements to the standard deep learning method, \eg
 \cite{teney2017graph} proposed to build graph over scene objects and question words. The visual graph is similar to ours, but the query graph differs. %\cite{teney2017graph} exploits the grammatical relations between words to generate query graph, while our method applies directed acyclic graph to represent query sentence. 
 Note that the method \cite{teney2017graph} proposed is still a neural network based method as the structured representations are fed into a recurrent network to form the final embedding and the answer is again inferred by a classifier. %In contrast to recent works~\cite{Lu2015, Lu2016Hie}, we focus on single scene and involve reasoning. 
 
-\etitle{Query Oriented Visual Tasks}. {\color{red} Peixi, please add Reinforcement learning based object detection here.} 
-Explores the environment to acquire supervision
-1. Reinforcement driven information acquisition in non-deterministic environments
-2. RL in negvitation
-3. RL in other visual+language field
+\etitle{Environment Exploration in Visual Field}. Reinforcement driven information acquisition is wildly applied in traditional vision domain, like visual object detection~\cite{DBLP:conf/cvpr/MathePS16}, face detection~\cite{DBLP:conf/cvpr/GoodrichA12} and image classification~\cite{DBLP:conf/nips/MnihHGK14}. In visual and language domain, relevant work like~\cite{DBLP:conf/cvpr/RenWZLL17} achieves image captioning with Embedding Reward. Reinforcement learning preserves ability to effectively select preferred actions, which benefits the system decomposing the problem into a few sub-tasks.
 
-Reinforcement learning in vqa 
-2. Learning to Reason: End-to-End Module Networks for Visual Question Answering
-Reinforcement learning inference time and accuracy trade-off. Feature based on low, middle and high level makes it better preserves information in the process, and less probability falling into local minimum.
 
 \eat{%20190305
 {Visual Objects Processing}. Visual object detection as well as relationship identification are the preliminary tasks for not only \vqa but also image captioning~\cite{lu2016visual,yao2018exploring,teney2017graph}. %Many works in not in VQA but in image captioning has been done by firstly detect the visual objects~\cite{lu2016visual,yao2018exploring}, and then discover the relationship among them. 
