@@ -39,13 +39,13 @@ P_\mathfrak{B}(Y|{X}) & =
 \end{align}
 where $\mathcal{Y}$ is the set of classes.
 
-%\begin{figure}[tb]
-%\centering
-%\includegraphics[width=\columnwidth]{inferGraphWorkflow}
-%\caption{The pipeline of inference graph used for inferring the role of a person object.}
-%\vspace{-4ex}
-%\label{fig:inferGraphWorkflow}
-%\end{figure}
+\begin{figure}[tb]
+\centering
+\includegraphics[width=\columnwidth]{inferGraph}
+\caption{Schematic diagram of inference graph.}
+\vspace{-4ex}
+\label{fig:inferGraphWork}
+\end{figure}
 
 \subsection{Learning the Structure of Inference Graph}
 
@@ -58,6 +58,9 @@ P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 where $c$ is a scale factor that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
 Note from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
+
+Fig. \ref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the tasks involved. First, the role of a candidate is inferred, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the whole scene.
+The scene information is then fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
 
 %\begin{figure}[tb!]
 %\centering
