@@ -117,7 +117,7 @@ For each vision task, the approach is not fixed, one task can be achieved by dif
 
 \subsubsection{Monte Carlo Methods}
 \label{sec-MC}
-\hspace{\parindent} The task now becomes a policy learning problem. Given a question and preference, output a policy containing a sequence of actions $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. There is no ground truth for each steps, but only a final reward indicates that whether the answer is correct based on current policy. We involve the concept of Monte Carlo Methods to learn the policy which guides the vision tasks, and such policy network requires an extra reward value in loss.
+\hspace{\parindent} The task now becomes a policy learning problem. Given a question and preference, output a policy containing a sequence of actions $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. There is no ground truth for each steps, but only a final reward indicates that whether the prediction result is correct based on current policy. We involve the concept of Monte Carlo Methods to learn the policy which guides the vision tasks, and such policy network requires an extra reward value in loss.
 
 \begin{small}
 \begin{equation} 
