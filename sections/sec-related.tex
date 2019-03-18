@@ -23,13 +23,17 @@ These prior works show that detecting all visual objects, their attributes and r
 }%20190305
 
 
-\etitle{Graph-based query answering}. Query answering has been extensively studied for graph data. In a nutshell, this work includes two aspects: query understanding, and query evaluation. We next review previous work on two aspects. 
+\etitle{Graph-based visual understanding}. ~\cite{TuMLCZ14} proposes a framework to understand events and answer user queries, where underlying knowledge is represented by a spatial-temporal-causal And-Or graph (S/T/C-AOG). 
+
+\eat{%20190318
+Query answering has been extensively studied for graph data. In a nutshell, this work includes two aspects: query understanding, and query evaluation. We next review previous work on two aspects. 
 
 \noindent (1) Queries expressed with natural languages are very user-friendly, but nontrivial to understand. Typically, they need to be structured before issuing over \eg search engine, knowledge graph, since structured queries are more expressive. There exist a host of works that based on query logs, human interaction and neural network, respectively. \cite{PoundHIW12} leverages query logs to train a classifier, based on which structured queries are generated.  \cite{ZhengC0YZ17} propose an approach to generate the structured queries through talking between the data (\ie the knowledge graph) and the user. \cite{YihCHG15} introduced how to generate a core inferential chain from a query with convolutional neural networks. As we only cope with a set of fixed queries, hence, we defer
 the topic of query understanding to another paper, and focus primarily on the query evaluation. \looseness=-1
 
 \noindent (2) To evaluate queries on graphs, a typical method is graph pattern matching. There has been a host of work
 on graph pattern matching, \eg techniques for finding exact matches~\cite{cordella2004sub-full,subiso76}, inexact matches~\cite{ZouCO09,TianP08}, and evaluating \kw{SPARQL} queries on \kw{RDF} data~\cite{WagnerTLHS12}. Our work differs from the prior work in the following: (1) we integrate arithmetical and set operations in the query graph, and (2) we develop technique to infer missing values for query answering. \looseness=-1
+}%20190318
 
 % \subsection{Outline of the Paper}
 

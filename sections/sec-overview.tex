@@ -5,7 +5,7 @@
 \begin{figure*}[tb!]
 \vspace{-1ex}
 \centerline{\includegraphics[scale=0.28]{overview.eps}}
-\caption{Overview of our approach, Entity Attribute Graph and Queries} \label{fig-overview}
+\caption{Overview of our approach, and graph-based representation of images and questions} \label{fig-overview}
 \vspace{-2ex}
 \end{figure*}
 %%%%%%%%%%%%%%%%
@@ -23,7 +23,7 @@ We use the same representations as~\cite{peixi2019}. To make the paper self-cont
 Assume a set ${\cal E}$ of entities, a set ${\cal D}$ of values, a set ${\cal P}$ of predicates indicating attributes of entities and a set $\Theta$ of types. 
 Each entity $e$ in ${\cal E}$ has a {\em unique ID} and a {\em type} in $\Theta$.
 
-An {\em entity-attribute} graph, denoted as \kw{EAG}, is a set of triples $t = (s, p, o)$, where {\em subject} $s$ is an entity in ${\cal E}$, $p$ is a {\em predicate} in ${\cal P}$, and {\em object} $o$ is either an entity in ${\cal E}$ or a value $d$ in ${\cal D}$. It can be represented as a directed edge-labeled graph $\eag=(V, E)$, such that (a) $V$ is the set of nodes consisting of $s$ and $o$ for each triple $t = (s, p, o)$; and (b) there is an edge in $E$ from $s$ to $o$ labeled by $p$ for each triple $t = (s, p, o)$. 
+An {\em entity-attribute} graph, denoted as \kw{EAG}, is a set of triples $t = (s, p, o)$, where {\em subject} $s$ is an entity in ${\cal E}$, $p$ is a {\em predicate} in ${\cal P}$, and {\em object} $o$ is either an entity in ${\cal E}$ or a value $d$ in ${\cal D}$. It can be represented as a directed edge-labeled graph $\eag=(V, E)$, such that (a) $V$ is the set of nodes consisting of $s$ and $o$ for each triple $t = (s, p, o)$; and (b) there is an edge in $E$ from $s$ to $o$ labeled by $p$ for each triple $t = (s, p, o)$. \looseness=-1
 
 
 \eat{%20190305
@@ -38,7 +38,7 @@ similarly for values $d_1$ and $d_2$ if $d_1=d_2$.
 }%20190305
 
 
-An image can be represented as an \kw{EAG} with detected objects and obvious attributes. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. Figure~\ref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
+An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. Figure~\ref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
 
 \stitle{Query Graphs.}  A query graph $Q(u_o)$ is a set of triples
 $(s_Q, p_Q, o_Q)$, where $s_Q$ is either a variable $z$ or a function $f(z)$ taking $z$ as parameter, $o_Q$ is one of a value $d$ or $z$ or $f(z)$, and $p_Q$ is a predicate in ${\cal P}$. Here function $f(z)$ is defined by users, and variable $z$ has one
@@ -69,12 +69,25 @@ Take Fig.~\ref{fig-overview}(c) as example. It depicts a query graph that is gen
 % \end{figure*}
 % %%%%%%%%%%%%%%%%
 
-Along the same lines as representations for images and questions, and graph pattern matching for question answering, raised in~\cite{peixi2019}, we propose a comprehensive approach as modeling of the \vqa problem. %answer a set of typical questions regarding soccer matches. 
 
-Figure~\ref{fig-overview}(a) presents the overview of our approach. As can be seen, our approach revolves around three graphs: entity-attribute graph, query graph and inference graph. The generation of entity-attribute graph $\eag$ follows three steps. Module \kw{VA} conducts the first step, \ie image processing, and outputs all the detected objects along with their attributes. Using visual contents produced in step one, module \kw{VGA} constructs an {\em incomplete} \kw{EAG}. In the last step, module \kw{VI} takes inference graph and {\em incomplete} \kw{EAG} as inputs, infer missing information with $G_I$, and outputs an updated \kw{EAG} for query answering. 
+\eat{
+Along the same lines as representations for images and questions, and graph pattern matching for question answering, raised in~\cite{peixi2019}, we propose a comprehensive approach as modeling of the \vqa problem. %answer a set of typical questions regarding soccer matches. 
+}
+
+Figure~\ref{fig-overview}(a) presents the overview of our approach. In a nutshell, our approach copes with two types of computations, \ie online computation, which responses to user's questions and offline computation that trains inference graphs (\ie a classifier) for missing value inference. 
+
+For online computation, our approach leverages five modules, \ie 
+
+
+Specifically, our approach consists of two types of 
+
+As can be seen, our approach revolves around three graphs: entity-attribute graph, query graph and inference graph. The generation of entity-attribute graph $\eag$ follows three steps. Module \kw{VA} conducts the first step, \ie image processing, and outputs all the detected objects along with their attributes. Using visual contents produced in step one, module \kw{VGA} constructs an {\em incomplete} \kw{EAG}. In the last step, module \kw{VI} takes inference graph and {\em incomplete} \kw{EAG} as inputs, infer missing information with $G_I$, and outputs an updated \kw{EAG} for query answering. 
 The inference graph $G_I$ is used to infer missing values of an {\em incomplete} $\kw{EAG}$. %In $G_I$, each node either denotes an attribute of an object or a class label indicating the class of the object, and each edge represents assignment of attribute value (resp. class label). $G_I$ is 
 and constructed by module \kw{IGC} over training data. As is query-independent, $G_I$ is constructed offline, which warrants the efficiency of our approach. %The other two graphs \ie entity-attribute graph and query graph are produced in parallel. 
 As the other part of input, natural language query $\nlq$ needs to be structured for query evaluation. To this end, $Q_{NL}$ is first parsed via our \kw{NLP} module, and then structured by module \kw{QGC}. After $Q(u_o)$ and $\eag$ are generated, our approach employs module $\kw{GM}$ for matching computation, and returns final result. \looseness=-1 %When extra information is required to answer the query, we use leverage a knowledge graph $\kw{KG}$ to provide additional information. \kw{KG} can be constructed offline via existing mature methods. 
+
+
+It takes an image and a natural language question $Q_{NL}$ as input, and works as following. (1)
 
 
 As some modules employ existing techniques, to emphasize our novelty, we will elaborate modules $\kw{VA}$ and $\kw{VGA}$ in Section~\ref{sec-understanding}, modules \kw{IGC} and \kw{VI} in Section~\ref{Inference}, and module \kw{GM} in Section~\ref{Query Answering} with more details. \looseness=-1
