@@ -27,7 +27,7 @@ P_\mathfrak{B}(X_1, \cdots, X_n) =
 
 In our inference graph, the role of Bayesian network is to predict the object class when given the attributes $\{X_i\}_{i=1}^n$ as input. In the sense of probability, the object class is also a variable \cite{koller2009probabilistic}.
 Defined by $X_0=Y$ the class variable, the network now has one extra vertex $X_0$.
-In order to infer the class attribute, and according to the Bayesian rule, the target network is given by:
+In order to infer the class attribute, and according to the Bayesian rule, our problem becomes:
 
 \vspace{-1ex}
 \begin{align}\label{eq:BNWithCls}
@@ -55,7 +55,7 @@ the structure of $P_\mathfrak{B}(Y|{X})$ is simplified by taking the class varia
 \begin{equation}\label{eq:BN-naiveBayes}
 P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
-where $c$ is a constant that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
+where $c$ is a scale factor that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
 Note from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
 
