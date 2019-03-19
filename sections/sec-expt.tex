@@ -1,7 +1,7 @@
 \section{Experimental Studies}
 \label{sec-expt}
 
-In this section, we conducted two sets of experiments to evaluate (1) the performance of our visual processing module, (2) the accuracy of our inference module, and (3) the overall performance of our approach. 
+In this section, we conduct two sets of experiments to evaluate (1) the performance of our visual processing module, (2) the accuracy of our inference module, and (3) the overall performance of our approach.
 
 \stitle{Experimental Setting}. %We report settings of experimental studies. 
 
@@ -12,7 +12,28 @@ In this section, we conducted two sets of experiments to evaluate (1) the perfor
 (We enlarge the training question scale from 7 into 28, so learning correlation between question and answer does not work at this time. For question details, please refer questionset.txt.rtf.)
 
 
-
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{2}{l}}
+			\Xhline{1pt}
+			& Time (ms)  & Acc(\%) \\ \Xhline{0.7pt}
+			CNN+LSTM  &  141  &  28.14\\
+			HieCoAttenVQA  &  237  &  31.92\\
+			Learning2Reason  &  297  &  38.00\\
+			Ours ($\gamma=0$)  &  N/A  &  65.85\\
+			Ours ($\gamma=0.01$)  &  401  &  55.92\\
+			Ours ($\gamma=0.50$)  &  591  &  62.29\\
+			Ours ($\gamma=0.99$)  &  680  &  64.02\\
+			\Xhline{1pt}
+		\end{tabular}
+		\caption{A set of questions}
+		\label{table:questions}
+	\end{center}
+\end{table}
+%==========Table===================
 
 
 \begin{table}[thb] 
@@ -47,7 +68,8 @@ $Q_{nl_7}$  & How many players are there in the image?           & Hard     \\ \
 
 
 \subsection{Performance of Visual Task Selecting Policy }
-To test the validity of reinforcement learning of selecting visual task modules, we test the inference time over accuracy with the state-of-art~\cite{VQA}~\cite{Lu2016Hie} whichi is shown in Figure~\ref{TimevsAcc}.
+
+To test the validity of reinforcement learning of selecting visual task modules, we test the inference time over accuracy with the state-of-art~\cite{VQA}~\cite{Lu2016Hie} which is shown in Figure~\ref{TimevsAcc}.
 
 \begin{figure}[h]
 \begin{center}
@@ -66,42 +88,190 @@ Here to test the generalization, we enlarge the training set by more various que
 \vspace{-2ex}
 \caption{Inference Graphs}
 \vspace{-2ex}
-\label{fig:inferG}
+\label{fig:inferGraph}
 \end{figure}
-\stitle{Accuracy of Role}. Only report results with Reinforcement learning 
 
-\stitle{Accuracy of Team-Status}. Only report results with Reinforcement learning 
 
-\stitle{Accuracy of Kick-Off}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+In VQA task, we aim to achieve great performance with short responding time. “CPU Time” evaluates the time cost from features extraction to question answering. All the computation work is implemented on CPU.
 
-\stitle{Accuracy of Penalty Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+In terms of system accuracy, we follow the F-measure. Define that $\#true\_value\_inferred$ is the total number of instances whose attribute $A$ is ``$v$'' and is inferred correctly as ``$v$'', $\#true\_value\_instance$ is the number of all the instances with attribute $A$ of value ``$v$'', and $\#inferred\_instances$ indicates the total number of instances whose attribute $A$ is inferred as ``$v$''. The inference accuracy can be defined as below. 
+\begin{equation}
+Acc(A=``v") = \frac{2 \cdot (recall(A=``v")) \cdot presision (A = ``v")}{recall(A=``v") + presision (A = ``v")}
+\end{equation}
+where:
+\begin{equation*}
+\begin{split}
+recall(A=``v") & = \frac{\#true\_value\_inferred}{\#true\_value\_instance} \\
+precision(A=``v") & = 
+\frac{\#true\_value\_inferred}{\#inferred\_instance}
+\end{split}
+\end{equation*}
 
-\stitle{Accuracy of Corner Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+We compare our approach to the state-of-the-art systems, i.e. CNN+LSTM[???], HieCoAttenVQA[???], and Learning2Reason[???]. 
 
-\stitle{Accuracy of Attacking Free Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{2}{r}}
+			\Xhline{1pt}
+			  & Time (ms)  & Acc(\%) \\ \Xhline{0.7pt}
+			CNN+LSTM  &  141  &  28.14\\
+			HieCoAttenVQA  &  237  &  31.92\\
+			Learning2Reason  &  297  &  38.00\\
+			Ours ($\gamma=0$)  &  N/A  &  65.85\\
+			Ours ($\gamma=0.01$)  &  401  &  55.92\\
+			Ours ($\gamma=0.50$)  &  591  &  62.29\\
+			Ours ($\gamma=0.99$)  &  680  &  64.02\\
+			\Xhline{1pt}
+		\end{tabular}
+	\caption{Accuracy comparison per query and average (\%).}
+	\label{tab:AccuracyCmp}
+	\end{center}
+\end{table}
+%==========Table===================
 
-\stitle{Accuracy of Balls}. {\color{red} Over new dataset. SHOW INFERENCE GRAPH AND RESULT TABLE!}
+
+%\autoref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. It shows that our approach significantly outperforms CNN+LSTM, HieCoAttenVQA, and Learning2Reason in inference accuracy. The accuracy of our approach is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. 
+
+\autoref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. For CNN+LSTM, HieCoAttenVQA, and Learning2Reason, their systems work quite efficient with responding time less than 300ms. But the accuracies of these three approaches are lower than 40\%, which is unacceptable. Whereas, the system similar to \cite{peixi2019} outperforms all other methods and reaches 65.86\% accuracy, but it costs much more time. Our approach is able to keep balance between effectiveness and efficiency. For effectiveness, our approach achieves 64.02\% accuracy, which is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. For efficiency, our approach can reduce the inference time by choosing a small value of $\gamma$.
+
+%Besides, the time cost of our approach is higher than other methods. However, \autoref{tab:AccuracyCmp} indicates that we can reduce the inference time if we choose a small value for $\gamma$.
+
+
+\stitle{Accuracy of Role}
+
+Based on queries and image characteristics, four variables including $direction$, $status$, $field$, and $unique\_color$ (abbr. $u\_color$) are adopted to calculate conditional probabilities. The inference graph is shown in \autoref{fig:inferGraph}. Note that the domain of variables $direction$, $status$ and $field$ are given in {\color{red}Table ????}, while variable $u\_color$ can have one of two values, to indicate whether a person object has the unique uniform color (=``$U$'') or not (=``$M$'').
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{3}{r}}
+			\Xhline{1pt}
+			Role & Precision  & Recall  & Accuracy \\ \Xhline{0.7pt}
+			Role = ``G''  &  94.4  &  85.5  &  89.8\\
+			Role = ``R''  &  87.4  &  82.8  &  85.0\\
+			Role = ``P''  &  98.8  &  99.3  &  99.0\\
+			\Xhline{1pt}
+		\end{tabular}
+	\caption{Inference accuracy of role (\%). Here ``G'', ``R'' and ``P'' indicate goalkeeper, referee and player, respectively.}
+	\label{tab:InferAccRole}
+	\end{center}
+\end{table}
+%==========Table===================
+
+Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each person object. The inference accuracy is shown in \autoref{tab:InferAccRole}. It is easy to find that the inference accuracy for role player reaches 99\%, which is highest among all roles. And the accuracies for different roles are all above 85\%.
+
+\stitle{Accuracy of Team Status}
+
+
+\stitle{Accuracy of Field Scene}
+
+%===================== figure ============
+\begin{figure}[!bth]
+	%\scriptsize
+	\centering	
+	\begin{minipage}[b]{\linewidth}
+		\centerline{\includegraphics[width=0.5\linewidth]{example-image-a}}
+	\end{minipage}\hfill
+	\caption{Attributes of Scene Inference Graph.}
+	\label{fig:AtribSceneGraph}
+\end{figure}
+%===================== figure ============
+
+Field Scene includes four different scenes, \textit{i.e.} corner kick, free kick, penalty kick and kick-off. Practically, corner kick scene always happens as a single player kick the ball within a one-yard radius of the corner flag and most of players gather in the penalty field. Free kick happens outside the penalty area and defensive wall exists mostly. It is much typical for the penalty kick scene because most of players are out of penalty area except kick player and goalkeeper with football in the penalty spot. As for kick-off scene, the ball is played in the center spot with all members of the opposing team at least 10 yards from the ball. Based on these observations, we design an inference graph in \autoref{fig:AtribSceneGraph}.
+
+
+Inference accuracy is indicated in \autoref{tab:InferAccField} based on inference graph in \autoref{fig:AtribSceneGraph}. As is shown, the inference accuracy of corner kick, free kick, kick-off and penalty kick are 59.57\%, 63.16\%, 85.94\% and 60.00\%, respectively. It is obvious that the scene of kick off reaches the highest accuracy among all.
+ 
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{3}{r}}
+			\Xhline{1pt}
+			Field Type & Precision  & Recall  & F1-score \\ \Xhline{0.7pt}
+			Field Scene = ``Co''  &  59.57  &  68.29  &  63.64\\
+			Field Scene = ``Fr''  &  63.16  &  58.54  &  60.76\\
+			Field Scene = ``Ki''  &  85.94  &  82.09  &  83.97\\
+			Field Scene = ``Pe''  &  60.00  &  60.00  &  60.00\\
+			\Xhline{0.7pt}
+			Average  &  71.28  &  70.73  &  70.89\\
+			\Xhline{1pt}
+		\end{tabular}
+	\caption{Inference accuracy of field scene (\%) with our approach. Here ``Co'', ``Fr'', ``Ki'' and ``Pe'' indicate corner kick, free kick, penalty kick and kick-off, respectively.}
+	\label{tab:InferAccField}
+	\end{center}
+\end{table}
+%==========Table===================
+
+
+In addition, we compared our approach with NuSVC, MLP, and AdaBoost in \autoref{tab:AccFieldCmp}. The results show that the average accuracy of our approach is higher than that of NuSVC and AdaBoost by 4.49\% and 5.97\% respectively, and slightly better than that of MLP.
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{3}{r}}
+			\Xhline{1pt}
+			 & Precision  & Recall  & F1-score \\ \Xhline{0.7pt}
+			NuSVC  &  68.30  &  65.85  &  66.40\\
+			MLP  &  70.80  &  \textbf{70.73}  &  70.32\\
+			AdaBoost  &  65.50  &  65.24  &  64.92\\ %\Xhline{0.7pt}
+			Ours  &  \textbf{71.28}  &  \textbf{70.73}  &  \textbf{70.89}\\
+			\Xhline{1pt}
+		\end{tabular}
+	\caption{Average accuracy comparison of field scene (\%)}
+	\label{tab:AccFieldCmp}
+	\end{center}
+\end{table}
+%==========Table===================
+
+
+
+%\stitle{Accuracy of Kick-Off}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+%
+%\stitle{Accuracy of Penalty Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+%
+%\stitle{Accuracy of Corner Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+%
+%\stitle{Accuracy of Attacking Free Kick}. {\color{red} SHOW INFERENCE GRAPH AND RESULT TABLE!}
+%
+%\stitle{Accuracy of Balls}. {\color{red} Over new dataset. SHOW INFERENCE GRAPH AND RESULT TABLE!}
 
 \subsection{Overall Performance}
 \label{sec-overall-performance}
-We use the same question setting as~\cite{peixi2019}, compared the following state-of-the-art methods: \cite{VQA},and~\cite{hu2017learning} with our method ($\gamma$=0.99), the overall performance is shown in Table~\ref{table:stateofart}. 
+%We use the same question setting as~\cite{peixi2019}, compared the following state-of-the-art methods: \cite{VQA},and~\cite{hu2017learning} with our method ($\gamma$=0.99), the overall performance is shown in Table~\ref{table:stateofart}. 
 
-\begin{table}[h]
-\begin{small}
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-          & CNN+LSTM & HieCoAtten & Learn2Reason & Ours  \\ \hline
-$Q_{nl1}$ & 44.23    & 43.62         & 31.12        & 64.16 \\ \hline
-$Q_{nl2}$ & 71.31    & 77.66         & 9.4          & 47.43 \\ \hline
-$Q_{nl3}$ & 74.58    & 83.78         & 83.21        & 70.02 \\ \hline
-$Q_{nl4}$ & 40.48    & 39.29         & 51.92        & 62.14 \\ \hline
-$Q_{nl5}$ & 49.19    & 49.90         & 30.78        & 93.33 \\ \hline
-$Q_{nl6}$ & 20.56    & 18.70         & 30.0         & 62.13 \\ \hline
-$Q_{nl7}$ & 11.08    & 12.63         & 36.69        & 47.45 \\ \hline
-Avg.       & 46.40    & 49.11         & 51.08        & 65.97 \\ \hline
-\end{tabular}
-\caption{Accuracy comparison per query (\%)}
-\label{table:stateofart}
-\end{small}
+We compared our proposed method with the following state-of-art methods: LSTM+CNN, HieCoAttenVQA, and Learn2Reason. The results are listed in \autoref{table:stateofart}. The average accuracy using our approach is higher than accuracy of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively. 
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{4}{c}}
+			\Xhline{1pt}
+			& CNN+LSTM & HieCoAtten & Learn2Reason & Ours \\ \Xhline{0.7pt}
+			$Q_{nl1}$ & 44.23    & 43.62         & 31.12        & \textbf{64.86} \\ 
+			$Q_{nl2}$ & 71.31    & \textbf{77.66}         & 9.4          & 63.74 \\ 
+			$Q_{nl3}$ & 74.58    & \textbf{83.78}         & 83.21        & 70.00 \\ 
+			$Q_{nl4}$ & 40.48    & 39.29         & 51.92        & \textbf{62.14} \\ 
+			$Q_{nl5}$ & 49.19    & 49.90         & 30.78        & \textbf{62.58} \\ 
+			$Q_{nl6}$ & 20.56    & 18.70         & 30.0         & \textbf{93.33} \\ 
+			$Q_{nl7}$ & 11.08    & 12.63         & 36.69        & \textbf{50.60} \\\Xhline{0.7pt} 
+			Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
+			\Xhline{1pt}
+		\end{tabular}
+	\caption{Accuracy comparison per query and average (\%)}
+	\label{table:stateofart}
+	\end{center}
 \end{table}
+%==========Table===================
 

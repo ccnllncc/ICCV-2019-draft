@@ -12,7 +12,12 @@ There has been many other improvements to the standard deep learning method, \eg
 \cite{teney2017graph} proposed to build graph over scene objects and question words. The visual graph is similar to ours, but the query graph differs. %\cite{teney2017graph} exploits the grammatical relations between words to generate query graph, while our method applies directed acyclic graph to represent query sentence. 
 Note that the method \cite{teney2017graph} proposed is still a neural network based method as the structured representations are fed into a recurrent network to form the final embedding and the answer is again inferred by a classifier. %In contrast to recent works~\cite{Lu2015, Lu2016Hie}, we focus on single scene and involve reasoning. 
 
-\etitle{Environment Exploration in Visual Field}. Reinforcement driven information acquisition is wildly applied in traditional vision domain, like visual object detection~\cite{DBLP:conf/cvpr/MathePS16}, face detection~\cite{DBLP:conf/cvpr/GoodrichA12} and image classification~\cite{DBLP:conf/nips/MnihHGK14}. In visual and language domain, relevant work like~\cite{DBLP:conf/cvpr/RenWZLL17} achieves image captioning with Embedding Reward. Reinforcement learning preserves ability to effectively select preferred actions, which benefits the system decomposing the problem into a few sub-tasks.
+
+\etitle{Environment Exploration in Visual Field}. Reinforcement driven information acquisition is not only focusing at games~\cite{NIPS2017_7084,NIPS2002_2171,NIPS2017_7007} but also wildly applied in traditional vision domain.~\cite{DBLP:conf/cvpr/MathePS16} implement reinforcement learning in visual object detection, by presenting a novel sequential
+models which accumulate evidence collected at a small set of
+image locations to detect visual objects effectively.~\cite{DBLP:conf/cvpr/GoodrichA12} forms the facial detection problem into an adaptive learning process, by designing an approximate optimal control framework, based on reinforcement learning to actively search a visual field.~\cite{DBLP:conf/nips/MnihHGK14} introduced a novel recurrent neural network model which is capable to extract information from an image or video by adaptive selection for a sequence of regions or locations.~\cite{zhu2017icra} introduced reinforcement learning in the task of target-driven visual navigation. Other works aims to achieving based on algorithms~\cite{5596468,DBLP:conf/aaai/AbtahiF11}.
+
+In visual and language domain, relevant work like~\cite{DBLP:conf/cvpr/RenWZLL17} achieves image captioning with Embedding Reward. Reinforcement learning preserves ability to effectively select preferred actions, which benefits the system decomposing the problem into a few sub-tasks.
 
 
 \eat{%20190305

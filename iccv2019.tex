@@ -6,6 +6,8 @@
 
 \usepackage{graphicx}
 \graphicspath{{figures/}}
+\usepackage{makecell}
+\usepackage{flushend}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -45,7 +47,7 @@
 % egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
 % run, let it finish, and you should be clear).
 \usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
-
+\usepackage{cleveref}
 % \iccvfinalcopy % *** Uncomment this line for the final submission
 
 \def\iccvPaperID{****} % *** Enter the ICCV Paper ID here
@@ -56,7 +58,7 @@
 \begin{document}
 
 %%%%%%%%% TITLE
-\title{Visual Question Answering with Adaptive Question Understanding and Reasoning}
+\title{Visual Question Answering with Question Understanding and Reasoning}
 
 \author{First Author\\
 Institution1\\
@@ -80,9 +82,11 @@ First line of institution2 address\\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
+Traditional techniques for visual question answering (\vqa) are mostly end-to-end neural network based, which often perform poorly (\eg inefficiency and low accuracy) due to lack of question understanding and necessary reasoning. To overcome the weaknesses, we propose a comprehensive approach with following key features for the \vqa problem. (1) It represents inputs, \ie image {\cal I}mg and question $\nlq$ as entity-attribute graph and pattern query, respectively, and employs graph matching to find answers; (2) it leverages reinforcement learning based model to identify a set of policies that are used to guide visual tasks and select the corresponding pattern query, based on $\nlq$; and (3) it trains a classifier and reasons missing values that are crucial for question answering. With these features, our approach not only conducts visual tasks more efficiently, but also answers questions with higher accuracy; better still, our approach also works in an end-to-end manner, owing to seamless integration of our techniques. To evaluate the performance of our approach, we conduct empirical studies on our soccer match data set (Soccer-VQA) and Visual-Genome data set, and show that our approach outperforms the state-of-the-art method in both efficiency and accuracy. 
+\eat{
 Visual Question Answering (\vqa) is of great significance in offering people convenience: one can raise a question for details of objects, or high-level understanding about the scene, over an image. 
 This paper proposes a novel method to address the \vqa problem. In contrast to prior works, our method that targets single scene \vqa, replies on graph-based techniques and involves reasoning. In a nutshell, our approach is centered on three graphs. The first graph, referred to as inference graph $G_I$, is constructed via learning over labeled data. The other two graphs, referred to as query graph $Q$ and entity-attribute graph $\eag$, are generated from natural language query $\nlq$ and image {\cal I}mg, that are issued from users, respectively. As $\eag$ often does not take sufficient information to answer $Q$, we develop techniques to infer missing information of $\eag$ with $G_I$. Based on $\eag$ and $Q$, we provide techniques to find matches of $Q$ in $\eag$, as the answer of $\nlq$ in {\cal I}mg. Unlike commonly used 
-\vqa methods that are based on end-to-end neural networks, our graph-based method shows well-designed reasoning capability, and thus is highly interpretable. We also create a dataset on soccer match (Soccer-VQA) with rich annotations. The experimental results show that our approach outperforms the state-of-the-art method and has high potential for future investigation.
+\vqa methods that are based on end-to-end neural networks, our graph-based method shows well-designed reasoning capability, and thus is highly interpretable. We also create a dataset on soccer match (Soccer-VQA) with rich annotations. The experimental results show that our approach outperforms the state-of-the-art method and has high potential for future investigation.}
 \end{abstract}
 
 
@@ -93,7 +97,7 @@ This paper proposes a novel method to address the \vqa problem. In contrast to p
 \input{./sections/sec-obj}
 \input{./sections/sec-reasoning}
 \input{./sections/sec-expt}
-
+\input{./sections/sec-conclusion}
 
 
 {\small

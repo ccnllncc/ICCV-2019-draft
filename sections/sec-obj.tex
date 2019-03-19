@@ -1,20 +1,22 @@
-\section{Query Oriented Visual Tasks}
+\section{Question Oriented Visual Tasks}
 \label{sec-reinforcement-learning}
 In this section, we introduce how we do visual tasks that are in connection with questions. 
 
 
+
+
 \subsection{Visual Processing}
+
+In our approach, we build a structure which selects sub-tasks to form a policy which is based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in Figure~\ref{fig:RLplot}.
+
 \label{sec-visual-processing}
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\linewidth]{RLplot.pdf}
 \end{center}
-\caption{Overview of our approach}
+\caption{Visual Processing Strategy}
 \label{fig:RLplot}
 \end{figure}
-
-In our approach, we build a structure which selects sub-tasks to form a policy which is based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in Figure~\ref{fig:RLplot}.
-
 
 \subsubsection{Multi-layer LSTM with Attention}
 \label{sec-LSTM}
@@ -136,5 +138,5 @@ After objects that are related to questions are identified, we construct a graph
 
 \begin{example}
 \label{exm-x1}
-ADD AN EXAMPLE TO ILLUSTRATE PROGRESS IF NECESSARY!
+{\color{red} ADD AN EXAMPLE TO ILLUSTRATE PROGRESS IF NECESSARY!}
 \end{example}
