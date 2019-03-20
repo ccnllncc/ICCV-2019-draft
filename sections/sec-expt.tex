@@ -87,16 +87,16 @@ To test the generalization of our method, we enlarge the training set by more va
 
 \begin{table}[h]
 	\small
-	\begin{tabular}{|l|l|l|l|}
-		\hline
-		\multicolumn{2}{|l|}{Various Training Questions} & \multicolumn{2}{l|}{Original Training Questions} \\ \hline
-		Methods                  & Acc(\%)            & Methods                   & Acc(\%)             \\ \hline
+	\begin{tabular}{l|l|l|l}
+		\Xhline{1pt}
+		\multicolumn{2}{l|}{Various Training Questions} & \multicolumn{2}{l}{Original Training Questions} \\ \Xhline{0.7pt}
+		Methods                  & Acc (\%)            & Methods                   & Acc (\%)             \\ \Xhline{0.7pt}
 		CNN+LSTM                    & 28.14              & CNN+LSTM                     & 46.40               \\ \hline
 		HieCoAttenVQA               & 31.92              & HieCoAttenVQA                & 49.11               \\ \hline
 		Learning2Reason             & 38.00              & Learning2Reason              & 51.08               \\ \hline
-		Ours                        & 64.02              & Ours                         & 66.75               \\ \hline
+		Ours                        & 64.02              & Ours                         & 66.75               \\ \Xhline{1pt}
 	\end{tabular}
-	\caption{Generalization of Our Method} \label{table:genralization}
+	\caption{Generalization of our method} \label{table:genralization}
 \end{table}
 
 
@@ -151,11 +151,11 @@ We compare our approach to the state-of-the-art systems, i.e. CNN+LSTM[???], Hie
 		\small		
 		\begin{tabular}{c|*{2}{c}}
 			\Xhline{1pt}
-			  & Time (ms)  & Accuracy (\%) \\ \Xhline{0.7pt}
+			  & Time (ms)  & Acc (\%) \\ \Xhline{0.7pt}
 			CNN+LSTM  &  141  &  28.14\\
 			HieCoAttenVQA  &  237  &  31.92\\
 			Learning2Reason  &  297  &  38.00\\
-			Ours (Without RL)  &  N/A  &  65.85\\
+			Ours (without RL)  &  N/A  &  65.85\\
 			Ours ($\gamma=0.01$)  &  401  &  55.92\\
 			Ours ($\gamma=0.50$)  &  591  &  62.29\\
 			Ours ($\gamma=0.99$)  &  680  &  64.02\\
@@ -181,7 +181,7 @@ Based on questions and image characteristics, four variables including $directio
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			Role & Precision  & Recall  & Accuracy \\ \Xhline{0.7pt}
+			Role & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
 			Goalkeeper  &  94.4  &  85.5  &  89.8\\
 			Referee  &  87.4  &  82.8  &  85.0\\
 			Player  &  98.8  &  99.3  &  99.0\\
@@ -204,7 +204,7 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 	\begin{minipage}[b]{\linewidth}
 		\centerline{\includegraphics[width=0.5\linewidth]{example-image-a}}
 	\end{minipage}\hfill
-	\caption{Attributes of Team Inference Graph.}
+	\caption{Attributes of team inference graph.}
 	\label{fig:AtribTeamGraph}
 \end{figure}
 %===================== figure ============
@@ -216,12 +216,12 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			Role & Precision  & Recall  & Accuracy \\ \Xhline{0.7pt}
+			Role & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
 			Defending  & 89.8 &	74.2 &	81.3\\
 			Attacking  &  79.1 & 	92.1 &	85.1\\
 			\Xhline{1pt}
 		\end{tabular}
-		\caption{Inference accuracy of team status.}
+		\caption{Inference accuracy of team status (\%).}
 		\label{tab:InferAccTeam}
 	\end{center}
 \end{table}
@@ -239,7 +239,7 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 	\begin{minipage}[b]{\linewidth}
 		\centerline{\includegraphics[width=0.5\linewidth]{example-image-a}}
 	\end{minipage}\hfill
-	\caption{Attributes of Scene Inference Graph.}
+	\caption{Attributes of scene inference graph.}
 	\label{fig:AtribSceneGraph}
 \end{figure}
 %===================== figure ============
@@ -257,7 +257,7 @@ Inference accuracy is indicated in \autoref{tab:InferAccField} based on inferenc
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			Field Type & Precision  & Recall  & {\color{red}F1-score} \\ \Xhline{0.7pt}
+			Field Type & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
 			Corner-kick &  59.57  &  68.29  &  63.64\\
 			Free-kick  &  63.16  &  58.54  &  60.76\\
 			Kick-off &  85.94  &  82.09  &  83.97\\
@@ -266,7 +266,7 @@ Inference accuracy is indicated in \autoref{tab:InferAccField} based on inferenc
 			Average  &  71.28  &  70.73  &  70.89\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Inference accuracy of field scene (\%) with our approach.
+	\caption{Inference accuracy of field scene with our approach (\%).
 		% Here ``Co'', ``Fr'', ``Ki'' and ``Pe'' indicate corner kick, free kick, penalty kick and kick-off, respectively.
 	}
 	\label{tab:InferAccField}
@@ -284,14 +284,14 @@ In addition, we compared our approach with NuSVC, MLP, and AdaBoost in \autoref{
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			 & Precision  & Recall  & {\color{red}F1-score} \\ \Xhline{0.7pt}
+			 & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
 			NuSVC  &  68.30  &  65.85  &  66.40\\
 			MLP  &  70.80  &  \textbf{70.73}  &  70.32\\
 			AdaBoost  &  65.50  &  65.24  &  64.92\\ %\Xhline{0.7pt}
 			Ours  &  \textbf{71.28}  &  \textbf{70.73}  &  \textbf{70.89}\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Average accuracy comparison of field scene (\%)}
+	\caption{Average accuracy comparison of field scene (\%).}
 	\label{tab:AccFieldCmp}
 	\end{center}
 \end{table}
@@ -313,7 +313,7 @@ In addition, we compared our approach with NuSVC, MLP, and AdaBoost in \autoref{
 \label{sec-overall-performance}
 %We use the same question setting as~\cite{peixi2019}, compared the following state-of-the-art methods: \cite{VQA},and~\cite{hu2017learning} with our method ($\gamma$=0.99), the overall performance is shown in Table~\ref{table:stateofart}. 
 
-We compared our proposed method with the following state-of-art methods: LSTM+CNN, HieCoAttenVQA, and Learn2Reason. The results are listed in \autoref{table:stateofart}. The average accuracy using our approach is higher than accuracy of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively. 
+We compared our proposed method with the following state-of-art methods: LSTM+CNN, HieCoAttenVQA, and Learn2Reason. The results are listed in \autoref{table:stateofartSoc}. The average accuracy using our approach is higher than accuracy of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively. 
 
 %==========Table===================
 \begin{table}[htbp]
@@ -333,9 +333,31 @@ We compared our proposed method with the following state-of-art methods: LSTM+CN
 			Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Accuracy comparison per question and average (\%)}
-	\label{table:stateofart}
+	\caption{Accuracy comparison per question and average for Soccer Dataset (\%).}
+	\label{table:stateofartSoc}
 	\end{center}
 \end{table}
 %==========Table===================
 
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{4}{c}}
+			\Xhline{1pt}
+			& CNN+LSTM & HieCoAtten & Learn2Reason & Ours \\ \Xhline{0.7pt}
+			$Q_{t1}$  &  63.72  &  64.83  &  \textbf{67.12}  &  65.59\\
+			$Q_{t2}$  &  22.87  &  24.52  &  25.04  &  \textbf{82.87}\\
+			$Q_{t3}$  &  36.96  &  37.89  &  \textbf{40.12}  &  34.16\\ \Xhline{0.7pt} 
+			Avg.       &  50.48  &  51.67  &  53.71  &  \textbf{63.41}\\
+			\Xhline{1pt}
+		\end{tabular}
+		\caption{Accuracy comparison per question type and average for Visual Genome Dataset (\%).}
+		\label{table:stateofartVisGen}
+	\end{center}
+\end{table}
+%==========Table===================
+
+To evaluate the generalization of the proposed scheme, we measure its accuracy on Visual Genome Dataset. Results in \autoref{table:stateofartVisGen} show that our approach can handle different types of questions, and the overall performance of our approach surpasses CNN+LSTM, HieCoAttenVQA and Learn2Reason by 12.93\%, 11.74\% and 9.7\%, respectively.
