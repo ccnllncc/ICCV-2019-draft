@@ -1,7 +1,7 @@
 \section{Reasoning}
 \label{sec-reasoning}
 
-According to our observation,  an {\em incomplete} \kw{EAG} isn't well satisfying of answering the query because of the insufficient attributes.
+According to our observation,  an {\em incomplete} \kw{EAG} isn't well satisfying of answering the question because of the insufficient attributes.
 To infer the hidden attributes, 
 %In our proposed method, 
 an inference graph is constructed accordingly.  
@@ -18,6 +18,7 @@ the parameter of $X_i$ is represented by  $\theta_{X_i | \text{Pa}(X_i)} = P_\ma
 With the notations above, the joint probability distribution of Bayesian network is given by:
 
 \begin{equation}\label{eq:BNOri}
+\small
 P_\mathfrak{B}(X_1, \cdots, X_n) = 
 \prod_{i=1}^{n} P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})=
 \prod_{i=1}^{n} \theta_{X_i | \text{Pa}(X_i)}
@@ -57,9 +58,9 @@ P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
 where $c$ is a scale factor that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
-Note from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
+One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
 
-Fig. \ref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the tasks involved. First, the role of a candidate is inferred, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the whole scene.
+\autoref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the tasks involved. First, the role of a candidate is inferred from $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the whole scene.
 The scene information is then fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
 
 %\begin{figure}[tb!]

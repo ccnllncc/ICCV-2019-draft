@@ -1,3 +1,4 @@
+
 \section{Experimental Studies}
 \label{sec-expt}
 
@@ -5,28 +6,43 @@ In this section, we conduct two sets of experiments to evaluate (1) the performa
 
 \stitle{Experimental Setting}. %We report settings of experimental studies. 
 
-\etitle{DataSet}. We used two datasets: (1) \kw{Soccer} dataset that we annotated; and (2) X dataset from~\cite{}. We extracted images with subjects of golf and tennis (report Statistics about the dataset). We split \kw{Soccer} (resp. X) data into two parts:{\em  I} (one third) and {\em II} (two thirds), and used {\em II} as training data, and {\em I} as testing data. 
+\etitle{DataSet}. We used three data sets: (1) \kw{Soccer} dataset that we annotated; and (2) Visual Genome dataset from \url{http://visualgenome.org}. We extracted images with subjects of golf and tennis. We split \kw{Soccer} data into two parts: {\color{red}{\em  I} (one third) and {\em II} (two thirds), and used {\em II} as training data, and {\em I} as testing data}. 
 
-\etitle{Queries}. We used two sets of questions: (1) the set of questions given in Table~\ref{table:questions} for \kw{Soccer} dataset; and (2) another set of questions listed in Table~\ref{} for X dataset. 
+\etitle{Questions}. We used two sets of questions: (1) the set of questions given in \autoref{table:questions} for \kw{Soccer} dataset; and (2) {\color{red}another set of questions listed in Table~\ref{xxx} for X dataset}. 
 
 (We enlarge the training question scale from 7 into 28, so learning correlation between question and answer does not work at this time. For question details, please refer questionset.txt.rtf.)
 
 
 %==========Table===================
-\begin{table}[htbp]
+\begin{table}[thb]
 	\renewcommand{\arraystretch}{1}
 	\begin{center}
-		\small		
+		\footnotesize		
 		\begin{tabular}{c|*{2}{l}}
 			\Xhline{1pt}
-			& Time (ms)  & Acc(\%) \\ \Xhline{0.7pt}
-			CNN+LSTM  &  141  &  28.14\\
-			HieCoAttenVQA  &  237  &  31.92\\
-			Learning2Reason  &  297  &  38.00\\
-			Ours ($\gamma=0$)  &  N/A  &  65.85\\
-			Ours ($\gamma=0.01$)  &  401  &  55.92\\
-			Ours ($\gamma=0.50$)  &  591  &  62.29\\
-			Ours ($\gamma=0.99$)  &  680  &  64.02\\
+			Id & Question                                           & Difficulty \\ \Xhline{0.7pt}
+			%$Q_{nl_1}$  & Who is this image about?                         & Hard       \\ \hline
+			$Q_{nl_1}$  & Who is holding the soccer?                         & Easy       \\ %\hline
+			$Q_{nl_2}$  & What is the uniform color of the referee?           & Easy       \\ %\hline
+			$Q_{nl_3}$  & Is there any referee in the image?                 & Easy       \\ \hline
+			$Q_{nl_4}$  & Which team does the goalkeeper belong to?          & Medium       \\ \hline
+			$Q_{nl_5}$  & Who is the defending team?                         & Medium       \\ \hline
+			$Q_{nl_6}$  & Which part of the field are the players being now? & Hard       \\ \hline
+			$Q_{nl_7}$  & How many players are there in the image?           & Hard     \\ \hline
+			
+			\multirow{2}{*}{$Q_{nl_8}$ }
+			& Is this image about corner kick?           &  \multirow{2}{*}{\color{red}??}  \\ 
+			& {\color{red}(If not, just list the correct one.)}  & \\ \hline
+			
+			\multirow{2}{*}{$Q_{nl_{9}}$}  &  Is this image about free kick?  &  \multirow{2}{*}{\color{red}??}    \\ 
+			& {\color{red}(If not, just list the correct one.)}  &  \\ \hline
+			
+			\multirow{2}{*}{$Q_{nl_{10}}$}  &  Is this image about kick off?  &  \multirow{2}{*}{\color{red}??}    \\ 
+			& {\color{red}(If not, just list the correct one.)}  &  \\ \hline
+			
+			\multirow{2}{*}{$Q_{nl_{11}}$}  &   Is this image about penalty kick?  &  \multirow{2}{*}{\color{red}??}    \\ 
+			& {\color{red}(If not, just list the correct one.)}  &  \\ %\hline
+			
 			\Xhline{1pt}
 		\end{tabular}
 		\caption{A set of questions}
@@ -36,57 +52,74 @@ In this section, we conduct two sets of experiments to evaluate (1) the performa
 %==========Table===================
 
 
-\begin{table}[thb] 
-\footnotesize
-\begin{tabular}{|l|l|l|}
-\hline
-Id & Question                                           & Difficulty \\ \hline
-%$Q_{nl_1}$  & Who is this image about?                         & Hard       \\ \hline
-$Q_{nl_1}$  & Who is holding the soccer?                         & Easy       \\ \hline
-$Q_{nl_2}$  & What is the uniform color of the referee?           & Easy       \\ \hline
-$Q_{nl_3}$  & Is there any referee in the image?                 & Easy       \\ \hline
-$Q_{nl_4}$  & Which team does the goalkeeper belong to?          & Medium       \\ \hline
-$Q_{nl_5}$  & Who is the defending team?                         & Medium       \\ \hline
-$Q_{nl_6}$  & Which part of the field are the players being now? & Hard       \\ \hline
-$Q_{nl_7}$  & How many players are there in the image?           & Hard     \\ \hline
+%\begin{table}[thb] 
+%\footnotesize
+%\begin{tabular}{|l|l|l|}
+%\hline
+%Id & Question                                           & Difficulty \\ \hline
+%%$Q_{nl_1}$  & Who is this image about?                         & Hard       \\ \hline
+%$Q_{nl_1}$  & Who is holding the soccer?                         & Easy       \\ \hline
+%$Q_{nl_2}$  & What is the uniform color of the referee?           & Easy       \\ \hline
+%$Q_{nl_3}$  & Is there any referee in the image?                 & Easy       \\ \hline
+%$Q_{nl_4}$  & Which team does the goalkeeper belong to?          & Medium       \\ \hline
+%$Q_{nl_5}$  & Who is the defending team?                         & Medium       \\ \hline
+%$Q_{nl_6}$  & Which part of the field are the players being now? & Hard       \\ \hline
+%$Q_{nl_7}$  & How many players are there in the image?           & Hard     \\ \hline
+%
+%\multirow{2}{*}{$Q_{nl_8}$ }
+% & Is this image about corner kick?           &  \multirow{2}{*}{\color{red}??}  \\ 
+% & {\color{red}(If not, just list the correct one.)}  & \\ \hline
+% 
+%\multirow{2}{*}{$Q_{nl_9}$}  &   Is this image about penalty kick?  &  \multirow{2}{*}{\color{red}??}    \\ 
+% & {\color{red}(If not, just list the correct one.)}  &  \\ \hline
+% 
+%\multirow{2}{*}{$Q_{nl_{10}}$}  &  Is this image about kick off?  &  \multirow{2}{*}{\color{red}??}    \\ 
+% & {\color{red}(If not, just list the correct one.)}  &  \\ \hline
+% 
+%\end{tabular} 
+%\caption{A set of questions} \label{table:questions}
+%\end{table}
 
-\multirow{2}{*}{$Q_{nl_8}$ }
- & Is this image about corner kick?           &  \multirow{2}{*}{\color{red}??}  \\ 
- & {\color{red}(If not, just list the correct one.)}  & \\ \hline
- 
-\multirow{2}{*}{$Q_{nl_9}$}  &   Is this image about penalty kick?  &  \multirow{2}{*}{\color{red}??}    \\ 
- & {\color{red}(If not, just list the correct one.)}  &  \\ \hline
- 
-\multirow{2}{*}{$Q_{nl_{10}}$}  &  Is this image about kick off?  &  \multirow{2}{*}{\color{red}??}    \\ 
- & {\color{red}(If not, just list the correct one.)}  &  \\ \hline
- 
-\end{tabular} 
-\caption{A set of questions} \label{table:questions}
+
+\subsection{Generalization Ability of Model}
+
+To test the generalization of our method, we enlarge the training set by more various question with same meaning. For instance, the original question of $Q_{nl5}$ is \textit{"Who is the defending team?"}, we add three more similar question asking \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}. Unlike state-of-art methods answering questions in~\cite{peixi2019}, adding generalization and variation in question would not dramatically change the performance, it is because the structure is not fixed, all the visual task selection is query oriented. For~\cite{hu2017learning}, even though the network is not fixed, the answering part is based on neural network, and essentially it also learns the statically correlation, which leads to the weakness in logical reasoning. The result is is shown in Table~\ref{table:genralization}.
+
+\begin{table}[h]
+	\small
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		\multicolumn{2}{|l|}{Various Training Questions} & \multicolumn{2}{l|}{Original Training Questions} \\ \hline
+		Methods                  & Acc(\%)            & Methods                   & Acc(\%)             \\ \hline
+		CNN+LSTM                    & 28.14              & CNN+LSTM                     & 46.40               \\ \hline
+		HieCoAttenVQA               & 31.92              & HieCoAttenVQA                & 49.11               \\ \hline
+		Learning2Reason             & 38.00              & Learning2Reason              & 51.08               \\ \hline
+		Ours                        & 64.02              & Ours                         & 66.75               \\ \hline
+	\end{tabular}
+	\caption{Generalization of Our Method} \label{table:genralization}
 \end{table}
-
-
 
 
 \subsection{Performance of Visual Task Selecting Policy }
 
-To test the validity of reinforcement learning of selecting visual task modules, we test the inference time over accuracy with the state-of-art~\cite{VQA}~\cite{Lu2016Hie} which is shown in Figure~\ref{TimevsAcc}.
+To test the validity of reinforcement learning of selecting visual task modules, we test the inference time over accuracy with the state-of-art~\cite{VQA}~\cite{Lu2016Hie} which is shown in \autoref{TimevsAcc}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{TimevsAcc.png}
 \end{center}
-\caption{Inference Time and Accuracy}
+\caption{Inference time and accuracy.}
 \label{fig:TimevsAcc}
 \end{figure}
 
-Here to test the generalization, we enlarge the training set by more various question with same meaning. For instance, the original question of $Q_{nl5}$ is \textit{"Who is the defending team?"}, we add three more similar question asking \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}. Unlike state-of-art methods answering questions in~\cite{peixi2019}, adding generalization and variation in question would not dramatically change the performance, it is because the structure is not fixed, all the visual task selection is query oriented. For~\cite{hu2017learning}, even though the network is not fixed, the answering part is based on neural network, and essentially it also learns the statically correlation, which leads to the weakness in logical reasoning.
+%Here to test the generalization, we enlarge the training set by more various question with same meaning. For instance, the original question of $Q_{nl5}$ is \textit{"Who is the defending team?"}, we add three more similar question asking \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}. Unlike state-of-art methods answering questions in~\cite{peixi2019}, adding generalization and variation in question would not dramatically change the performance, it is because the structure is not fixed, all the visual task selection is question oriented. For~\cite{hu2017learning}, even though the network is not fixed, the answering part is based on neural network, and essentially it also learns the statically correlation, which leads to the weakness in logical reasoning.
 
 \subsection{Effectiveness of Inference} 
 \begin{figure}[tb!]
 \centering
 \includegraphics[width=\columnwidth]{PredictNB.eps}
 \vspace{-2ex}
-\caption{Inference Graphs}
+\caption{Inference graphs}
 \vspace{-2ex}
 \label{fig:inferGraph}
 \end{figure}
@@ -96,6 +129,8 @@ In VQA task, we aim to achieve great performance with short responding time. “
 
 In terms of system accuracy, we follow the F-measure. Define that $\#true\_value\_inferred$ is the total number of instances whose attribute $A$ is ``$v$'' and is inferred correctly as ``$v$'', $\#true\_value\_instance$ is the number of all the instances with attribute $A$ of value ``$v$'', and $\#inferred\_instances$ indicates the total number of instances whose attribute $A$ is inferred as ``$v$''. The inference accuracy can be defined as below. 
 \begin{equation}
+\scriptsize
+\color{red}
 Acc(A=``v") = \frac{2 \cdot (recall(A=``v")) \cdot presision (A = ``v")}{recall(A=``v") + presision (A = ``v")}
 \end{equation}
 where:
@@ -114,35 +149,30 @@ We compare our approach to the state-of-the-art systems, i.e. CNN+LSTM[???], Hie
 	\renewcommand{\arraystretch}{1}
 	\begin{center}
 		\small		
-		\begin{tabular}{c|*{2}{r}}
+		\begin{tabular}{c|*{2}{c}}
 			\Xhline{1pt}
-			  & Time (ms)  & Acc(\%) \\ \Xhline{0.7pt}
+			  & Time (ms)  & Accuracy (\%) \\ \Xhline{0.7pt}
 			CNN+LSTM  &  141  &  28.14\\
 			HieCoAttenVQA  &  237  &  31.92\\
 			Learning2Reason  &  297  &  38.00\\
-			Ours ($\gamma=0$)  &  N/A  &  65.85\\
+			Ours (Without RL)  &  N/A  &  65.85\\
 			Ours ($\gamma=0.01$)  &  401  &  55.92\\
 			Ours ($\gamma=0.50$)  &  591  &  62.29\\
 			Ours ($\gamma=0.99$)  &  680  &  64.02\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Accuracy comparison per query and average (\%).}
+	\caption{Inference time and accuracy comparison.}
 	\label{tab:AccuracyCmp}
 	\end{center}
 \end{table}
 %==========Table===================
 
-
-%\autoref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. It shows that our approach significantly outperforms CNN+LSTM, HieCoAttenVQA, and Learning2Reason in inference accuracy. The accuracy of our approach is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. 
-
 \autoref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. For CNN+LSTM, HieCoAttenVQA, and Learning2Reason, their systems work quite efficient with responding time less than 300ms. But the accuracies of these three approaches are lower than 40\%, which is unacceptable. Whereas, the system similar to \cite{peixi2019} outperforms all other methods and reaches 65.86\% accuracy, but it costs much more time. Our approach is able to keep balance between effectiveness and efficiency. For effectiveness, our approach achieves 64.02\% accuracy, which is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. For efficiency, our approach can reduce the inference time by choosing a small value of $\gamma$.
-
-%Besides, the time cost of our approach is higher than other methods. However, \autoref{tab:AccuracyCmp} indicates that we can reduce the inference time if we choose a small value for $\gamma$.
 
 
 \stitle{Accuracy of Role}
 
-Based on queries and image characteristics, four variables including $direction$, $status$, $field$, and $unique\_color$ (abbr. $u\_color$) are adopted to calculate conditional probabilities. The inference graph is shown in \autoref{fig:inferGraph}. Note that the domain of variables $direction$, $status$ and $field$ are given in {\color{red}Table ????}, while variable $u\_color$ can have one of two values, to indicate whether a person object has the unique uniform color (=``$U$'') or not (=``$M$'').
+Based on questions and image characteristics, four variables including $direction$, $status$, $field$, and $unique\_color$ (abbr. $u\_color$) are adopted to calculate conditional probabilities. The inference graph is shown in \autoref{fig:inferGraph}. Note that the domain of variables $direction$, $status$ and $field$ are given in {\color{red}Table ????}, while variable $u\_color$ can have one of two values, to indicate whether a person object has the unique uniform color (=``$U$'') or not (=``$M$'').
 
 %==========Table===================
 \begin{table}[htbp]
@@ -152,12 +182,12 @@ Based on queries and image characteristics, four variables including $direction$
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
 			Role & Precision  & Recall  & Accuracy \\ \Xhline{0.7pt}
-			Role = ``G''  &  94.4  &  85.5  &  89.8\\
-			Role = ``R''  &  87.4  &  82.8  &  85.0\\
-			Role = ``P''  &  98.8  &  99.3  &  99.0\\
+			Goalkeeper  &  94.4  &  85.5  &  89.8\\
+			Referee  &  87.4  &  82.8  &  85.0\\
+			Player  &  98.8  &  99.3  &  99.0\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Inference accuracy of role (\%). Here ``G'', ``R'' and ``P'' indicate goalkeeper, referee and player, respectively.}
+	\caption{Inference accuracy of role (\%).}
 	\label{tab:InferAccRole}
 	\end{center}
 \end{table}
@@ -166,6 +196,38 @@ Based on queries and image characteristics, four variables including $direction$
 Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each person object. The inference accuracy is shown in \autoref{tab:InferAccRole}. It is easy to find that the inference accuracy for role player reaches 99\%, which is highest among all roles. And the accuracies for different roles are all above 85\%.
 
 \stitle{Accuracy of Team Status}
+
+%===================== figure ============
+\begin{figure}[!bth]
+	%\scriptsize
+	\centering	
+	\begin{minipage}[b]{\linewidth}
+		\centerline{\includegraphics[width=0.5\linewidth]{example-image-a}}
+	\end{minipage}\hfill
+	\caption{Attributes of Team Inference Graph.}
+	\label{fig:AtribTeamGraph}
+\end{figure}
+%===================== figure ============
+
+%==========Table===================
+\begin{table}[htbp]
+	\renewcommand{\arraystretch}{1}
+	\begin{center}
+		\small		
+		\begin{tabular}{c|*{3}{r}}
+			\Xhline{1pt}
+			Role & Precision  & Recall  & Accuracy \\ \Xhline{0.7pt}
+			Defending  & 89.8 &	74.2 &	81.3\\
+			Attacking  &  79.1 & 	92.1 &	85.1\\
+			\Xhline{1pt}
+		\end{tabular}
+		\caption{Inference accuracy of team status.}
+		\label{tab:InferAccTeam}
+	\end{center}
+\end{table}
+%==========Table===================
+
+\autoref{tab:InferAccTeam} gives the performance of our approach for inferring team status. Both of the accuracies of defending and attacking are above 80\%. To be specific, the accuracy for inferring if a team is attacking achieves 85.1\%, which is higher than the inference accuracy for defending status detection by 3.8\%.
 
 
 \stitle{Accuracy of Field Scene}
@@ -195,16 +257,18 @@ Inference accuracy is indicated in \autoref{tab:InferAccField} based on inferenc
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			Field Type & Precision  & Recall  & F1-score \\ \Xhline{0.7pt}
-			Field Scene = ``Co''  &  59.57  &  68.29  &  63.64\\
-			Field Scene = ``Fr''  &  63.16  &  58.54  &  60.76\\
-			Field Scene = ``Ki''  &  85.94  &  82.09  &  83.97\\
-			Field Scene = ``Pe''  &  60.00  &  60.00  &  60.00\\
+			Field Type & Precision  & Recall  & {\color{red}F1-score} \\ \Xhline{0.7pt}
+			Corner-kick &  59.57  &  68.29  &  63.64\\
+			Free-kick  &  63.16  &  58.54  &  60.76\\
+			Kick-off &  85.94  &  82.09  &  83.97\\
+			Penalty-kick  &  60.00  &  60.00  &  60.00\\
 			\Xhline{0.7pt}
 			Average  &  71.28  &  70.73  &  70.89\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Inference accuracy of field scene (\%) with our approach. Here ``Co'', ``Fr'', ``Ki'' and ``Pe'' indicate corner kick, free kick, penalty kick and kick-off, respectively.}
+	\caption{Inference accuracy of field scene (\%) with our approach.
+		% Here ``Co'', ``Fr'', ``Ki'' and ``Pe'' indicate corner kick, free kick, penalty kick and kick-off, respectively.
+	}
 	\label{tab:InferAccField}
 	\end{center}
 \end{table}
@@ -220,7 +284,7 @@ In addition, we compared our approach with NuSVC, MLP, and AdaBoost in \autoref{
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			 & Precision  & Recall  & F1-score \\ \Xhline{0.7pt}
+			 & Precision  & Recall  & {\color{red}F1-score} \\ \Xhline{0.7pt}
 			NuSVC  &  68.30  &  65.85  &  66.40\\
 			MLP  &  70.80  &  \textbf{70.73}  &  70.32\\
 			AdaBoost  &  65.50  &  65.24  &  64.92\\ %\Xhline{0.7pt}
@@ -269,7 +333,7 @@ We compared our proposed method with the following state-of-art methods: LSTM+CN
 			Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Accuracy comparison per query and average (\%)}
+	\caption{Accuracy comparison per question and average (\%)}
 	\label{table:stateofart}
 	\end{center}
 \end{table}

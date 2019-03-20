@@ -58,27 +58,65 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 \hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in Table~\ref{table:visual_tasks}.
 
 
-\begin{table}[th]
-\centering \scriptsize
-\begin{tabular}{|l|ll|l|}
-\hline
-visAttr & \multicolumn{1}{l|}{Level}  & Sub-task           & Descriptions                                                                                                                                 \\ \cline{2-4} 
-        & \multicolumn{1}{l|}{Low}    & Keypoint Module    & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}To get detailed information of the \\ soccer field $F_{keypoint}$.\end{tabular}}                  \\ \cline{3-3}
-        & \multicolumn{1}{l|}{}       & Line Module        &                                                                                                                                              \\ \cline{3-3}
-        & \multicolumn{1}{l|}{}       & Ellipse Module     &                                                                                                                                              \\ \cline{3-4} 
-        & \multicolumn{1}{l|}{}       & Color Blob Module  & \begin{tabular}[c]{@{}l@{}}To detect blobs of different colors \\ among a region(whole soccer \\ field or a small bounding box).\end{tabular} \\ \cline{2-4} 
-        & \multicolumn{1}{l|}{Middle} & Location Module    & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ person $P_{location}$.\end{tabular}                                              \\ \cline{3-4} 
-        & \multicolumn{1}{l|}{}       & Status Module      & \begin{tabular}[c]{@{}l@{}}To get the person's gesture \\ $P_{status}$ (standing, moving, \\ expansion).\end{tabular}                        \\ \cline{3-4} 
-        & \multicolumn{1}{l|}{}       & Direction Module   & \begin{tabular}[c]{@{}l@{}}To get whether a person is facing \\ the goal or not $P_{direction}$.\end{tabular}                               \\ \cline{3-4} 
-        & \multicolumn{1}{l|}{}       & Uniform Module     & \begin{tabular}[c]{@{}l@{}}To get the uniform color of the \\ person $P_{uniform}$.\end{tabular}                                              \\ \cline{3-4} 
-        & \multicolumn{1}{l|}{}       & Soccer Module      & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ soccer $S_{location}$.\end{tabular}                                              \\ \cline{2-4} 
-        & \multicolumn{1}{l|}{High}   & Field Part Module  & \begin{tabular}[c]{@{}l@{}}To detect which part of the\\ soccer field is there in the \\ image $F_{part}$ .\end{tabular}                     \\ \hline
-visGID  &                             & Graph ID Indicator & \begin{tabular}[c]{@{}l@{}}To indicate which type of graph\\ will be used in the following \\process.\end{tabular}                          \\ \hline
-\end{tabular}
-\caption{Visual Task Pool}
+%\begin{table}[th]
+%\centering 
+%\scriptsize
+%
+%\begin{tabular}{|l|ll|l|}
+%\hline
+%visAttr & \multicolumn{1}{l|}{Level}  & Sub-task           & Descriptions                                                                                                                                 \\ \cline{2-4} 
+%        & \multicolumn{1}{l|}{Low}    & Keypoint Module    & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}To get detailed information of the \\ soccer field $F_{keypoint}$.\end{tabular}}                  \\ \cline{3-3}
+%        & \multicolumn{1}{l|}{}       & Line Module        &                                                                                                                                              \\ \cline{3-3}
+%        & \multicolumn{1}{l|}{}       & Ellipse Module     &                                                                                                                                              \\ \cline{3-4} 
+%        & \multicolumn{1}{l|}{}       & Color Blob Module  & \begin{tabular}[c]{@{}l@{}}To detect blobs of different colors \\ among a region(whole soccer \\ field or a small bounding box).\end{tabular} \\ \cline{2-4} 
+%        & \multicolumn{1}{l|}{Middle} & Location Module    & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ person $P_{location}$.\end{tabular}                                              \\ \cline{3-4} 
+%        & \multicolumn{1}{l|}{}       & Status Module      & \begin{tabular}[c]{@{}l@{}}To get the person's gesture \\ $P_{status}$ (standing, moving, \\ expansion).\end{tabular}                        \\ \cline{3-4} 
+%        & \multicolumn{1}{l|}{}       & Direction Module   & \begin{tabular}[c]{@{}l@{}}To get whether a person is facing \\ the goal or not $P_{direction}$.\end{tabular}                               \\ \cline{3-4} 
+%        & \multicolumn{1}{l|}{}       & Uniform Module     & \begin{tabular}[c]{@{}l@{}}To get the uniform color of the \\ person $P_{uniform}$.\end{tabular}                                              \\ \cline{3-4} 
+%        & \multicolumn{1}{l|}{}       & Soccer Module      & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ soccer $S_{location}$.\end{tabular}                                              \\ \cline{2-4} 
+%        & \multicolumn{1}{l|}{High}   & Field Part Module  & \begin{tabular}[c]{@{}l@{}}To detect which part of the\\ soccer field is there in the \\ image $F_{part}$ .\end{tabular}                     \\ \hline
+%visGID  &                             & Graph ID Indicator & \begin{tabular}[c]{@{}l@{}}To indicate which type of graph\\ will be used in the following \\process.
+%\end{tabular}                          \\ \hline
+%\end{tabular}
+%\caption{\color{red}Visual Task Pool}
+%\label{table:visual_tasks}
+%\end{table}
+
+%==========Table===================
+\begin{table}[htbp]
+	\centering 
+	\scriptsize
+%\begin{tabularx}{c| c| l | p{3cm} }
+\begin{tabularx}{\linewidth}{ c | c| l | X }
+	\Xhline{1pt}
+
+%visAttr:
+	\multirow{12}{*}[-5em]{visAttr} & {Level}  & Sub-task           & Descriptions                                                                                                                                 \\ \Xcline{2-4}{0.7pt}
+	
+	% first part
+	& \multirow{4}{*}[-12pt]{Low} & Keypoint Module &  \multirow{3}{*}{ \parbox{3cm}{To get detailed information of the soccer field $F_\text{keypoint}$.} }  \\ \cline{3-3}
+	& 					& Line Module   & \\\cline{3-3}
+	& 					& Ellipse Module    & \\\cline{3-4}
+	&					& Color Blob Module & {To detect blobs of different colors  among a region ( whole soccer field or a small bounding box).}\\ \cline{2-4}
+	
+	% second part
+	& \multirow{5}{*}[-28pt]{Middle} & Location Module &  {To detect the location of the person $P_\text{location}$.}\\ \cline{3-4}
+	&						  & Status Module   &   {To get the person's gesture  $P_\text{status}$ (standing, moving, expansion).} \\ \cline{3-4}
+	&						  & Direction Module   &   {To get whether a person is facing the goal or not $P_\text{direction}$.} \\ \cline{3-4}
+	&						  & Uniform Module    &   {To get the uniform color of the person $P_\text{uniform}$.} \\ \cline{3-4}
+	&						  & Soccer Module  &  {To detect the location of the soccer $S_\text{location}$.}  \\ \cline{2-4}
+	
+	% third part
+	& \multirow{1}{*}[-4pt]{High} & Field Part Module &  {To detect which part of the soccer field is there in the image $F_\text{part}$.} \\ \hline 
+	
+%visGID part
+\multirow{1}{*}[-8pt]{visGID}  & \multicolumn{2}{c|}{\multirow{1}{*}[-8pt]{Graph ID Indicator}}	 &  {To indicate which type of graph  will be used in the following process.} \\
+\Xhline{1pt}
+\end{tabularx}
+\caption{\color{red}Visual Task Pool}
 \label{table:visual_tasks}
 \end{table}
-
+%==========Table===================
 
 The pool is constructed by two parts, the first one is \textit{visAttr} which aims to discover the attribute of people, soccer, field and scene~\cite{peixi2019}, while the other one \textit{visGId} is an indicator showing the current question belongs to which graph type. There are three levels of \textit{visAttr}: low, middle and high, which represents different difficulty degree of the vision tasks. 
 
