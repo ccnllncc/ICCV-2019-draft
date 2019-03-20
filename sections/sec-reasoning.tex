@@ -58,7 +58,11 @@ P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
 where $c$ is a scale factor that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
-One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, the simple model works excellently to our problem. 
+One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, this simple model works excellently to our problem. 
+
+In the area of \vqa, some simple questions may need the implicit attributes to assistant the answering system to find out the final answer. 
+As a closely related example, a typical problem may be ``how many players are there in the image?''. 
+In this case, not only all the \emph{person} objects are needed to be identified, but also the hidden attribute: the role of each person. 
 
 \autoref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the tasks involved. First, the role of a candidate is inferred from $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the whole scene.
 The scene information is then fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
