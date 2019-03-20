@@ -1,11 +1,11 @@
 \section{Reasoning}
 \label{sec-reasoning}
 
-According to our observation,  an {\em incomplete} \kw{EAG} isn't well satisfying of answering the question because of the insufficient attributes.
-To infer the hidden attributes, 
+According to our observation,  an {\em incomplete} \kw{EAG} isn't well satisfying of answering the question because of missing value of hidden attributes.
+To infer missing value of hidden attributes, 
 %In our proposed method, 
-an inference graph is constructed accordingly.  
-we briefly introduce the construction below. 
+an inference graph is required.  
+We briefly introduce the construction below. 
 
 \subsection{Construction of Inference Graph}
 To take advantage of the prior information and increase the generalization ability of the proposed model, our inference graph is constructed using Bayesian network.
@@ -15,7 +15,7 @@ Additionally, the second item $\varTheta_\mathcal{G}$ is a set of parameters use
 Denoted by $\text{Pa}(X_i)$ the attributes of the parents of $X_i$, 
 the parameter of $X_i$ is represented by  $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$.
 %We use the notation $\theta_{X_i | \text{Pa}(X_i)} = P_\mathfrak{B}(X_i| \text{Pa}{(X_i)})$ to denote the parameter of $X_i$, of which $\text{Pa}(X_i)$ is the attributes of the parents of $X_i$.
-With the notations above, the joint probability distribution of Bayesian network is given by:
+With the notations above, the joint probability distribution of Bayesian network is given by: \looseness=-1
 
 \begin{equation}\label{eq:BNOri}
 \small
@@ -60,12 +60,20 @@ where $c$ is a scale factor that makes the calculation being a distribution: $c=
 
 One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, this simple model works excellently to our problem. 
 
-In the area of \vqa, some simple questions may need the implicit attributes to assistant the answering system to find out the final answer. 
-As a closely related example, a typical problem may be ``how many players are there in the image?''. 
-In this case, not only all the \emph{person} objects are needed to be identified, but also the hidden attribute: the role of each person. 
-
-\autoref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the tasks involved. First, the role of a candidate is inferred from $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the whole scene.
-The scene information is then fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
+In the area of \vqa, some simple questions may need the implicit attributes to help the answering system to find out the correct answer. 
+Taking the soccer scene as description,
+a closely related problem may be ``How many players are there in the defending team at a free kick scene?''. 
+In this case, three target attributes are involved: the \emph{role} of any detected person, the \emph{team status}, as well as the \emph{scene type}, all of which are implicit to us. 
+%This inspire us to develop techniques inferred from the image. 
+%Inference graph is a useful tool to infer the hidden 
+%To be specific, the value of individual \emph{role} refers to \emph{player}, \emph{goalkeeper}, and \emph{referee}. 
+%The value of \emph{team status} is either \emph{defending} or \emph{attacking}. 
+%And the value of \emph{scene type} may be one of \emph{corner kick}, \emph{free kick}, \emph{kick off}, and \emph{penalty kick}.
+Specifically, the inferring of the \emph{scene type} is heavily relied on the other two hidden attributes: the \emph{role} of a detected person and the \emph{team status}. 
+Therefore, our inference graph works in an indirect manner to reason the target information.
+\autoref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the difficult level of the task. First, the role of a detected person is inferred from the first inference graph $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the scene of the query image.
+The scene information is finally fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
+The designed features will be discussed in the experimental section.  
 
 %\begin{figure}[tb!]
 %\centering

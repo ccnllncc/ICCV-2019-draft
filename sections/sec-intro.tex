@@ -7,14 +7,14 @@ problem of automatically and efficiently answering questions about visual conten
 Though important, the \vqa problem brings a rich set of challenges spanning various domains such as computer vision, natural language processing, knowledge representation, and reasoning. 
 In recent years, \vqa has achieved significant
 progress, owing to the development of deep architectures suited for this task and the creation of large \vqa datasets to train these models. 
-However, a number of studies~\cite{peixi2019,Goyal_2017} also pointed out that despite recent progress, today's neural network based approaches demonstrate a few weaknesses, which greatly hinders its further development. First of all, existing techniques train deep neural networks to predict answers, where image-question pairs are jointly embedded as training data, following this way, the correlation between the question and the image is ignored, which may lead to difficulty in balancing accuracy and efficiency. Secondly, deep neural networks works as ``black boxes'', it is very hard to identify the causal relations between network design and system performance, not to mention ensuring acceptable performance. Lastly, due to lack of reasoning capability, existing techniques show poor performance when answering real-life questions, that are often open-ended and require necessary reasoning. \looseness=-1
+However, a number of studies~\cite{peixi2019,Goyal_2017} also pointed out that despite recent progress, today's neural network based approaches demonstrate a few weaknesses, which greatly hinders its further development. First of all, existing techniques train deep neural networks to predict answers, where image-question pairs are jointly embedded as training data, following this way, the correlation between the question and the image is ignored, which may lead to difficulty in balancing accuracy and efficiency. Secondly, deep neural networks works as ``black boxes'', it is very hard to identify the causal relations between network design and system performance, not to mention ensuring acceptable performance. Lastly, due to lack of reasoning capability, a host of existing techniques show poor performance when answering real-life questions, that are often open-ended and require necessary reasoning. Though a novel method~\cite{peixi2019} with reasoning capability is proposed, the method shows difficulty in generalization.  
 
 To address the issues mentioned above, a method, that finds answers based on the understanding of the questions and necessary reasoning, is required. 
 
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=\columnwidth]{motivation.png}
+\includegraphics[width=\columnwidth]{figures/motivation.eps}
 \caption{The image is about soccer match, where each person object is associated with attributes: id, uniform color, status (\underline{S}tanding, \underline{M}oving, \underline{E}xpansion), direction (\underline{B}acking, \underline{F}acing, \underline{N/A}), as well as location, and the soccer object is attributed with location. However, not all informations are necessary in answering one question, visual tasks are selected to achieve acquiring relevant information.%Part (b) shows a part of corresponding entity-attribute graph. Part (c) exhibits a $\nlq$ and its corresponding query graph $Q$. 
 }
 \vspace{-4ex}

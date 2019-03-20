@@ -120,25 +120,30 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 
 The pool is constructed by two parts, the first one is \textit{visAttr} which aims to discover the attribute of people, soccer, field and scene~\cite{peixi2019}, while the other one \textit{visGId} is an indicator showing the current question belongs to which graph type. There are three levels of \textit{visAttr}: low, middle and high, which represents different difficulty degree of the vision tasks. 
 
+
+\eat{
 \begin{figure}[thb]
 \centering
         \begin{subfigure}[b]{0.088\textwidth}
-                \includegraphics[width=\linewidth]{stand1.png}
+                \includegraphics[width=\linewidth]{figures/stand1.eps}
                 \caption{Standing}
                 \label{fig:gull}
         \end{subfigure}\quad
         \begin{subfigure}[b]{0.127\textwidth}
-                \includegraphics[width=\linewidth]{move1.png}
+                \includegraphics[width=\linewidth]{figures/move1.eps}
                 \caption{Moving}
                 \label{fig:gull2}
         \end{subfigure}\quad
         \begin{subfigure}[b]{0.166\textwidth}
-                \includegraphics[width=\linewidth]{expand1.png}
+                \includegraphics[width=\linewidth]{figures/expand1.eps}
                 \caption{Expansion}
                 \label{fig:tiger}
         \end{subfigure}
         \caption{Person status.}\label{fig:Person Status}
 \end{figure}
+}
+
+
 
 For each vision task, the approach is not fixed, one task can be achieved by different methods with variance in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture (Figure~\ref{fig:Person Status}). Thus, the system is not only able to determine whether resembles a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section.
 
@@ -174,7 +179,10 @@ For each vision task, the approach is not fixed, one task can be achieved by dif
 After objects that are related to questions are identified, we construct a graph structure, denoted as \kw{EAG}, along the same line as~\cite{peixi2019}. 
 
 
+
+\eat{
 \begin{example}
 \label{exm-x1}
 {\color{red} ADD AN EXAMPLE TO ILLUSTRATE PROGRESS IF NECESSARY!}
 \end{example}
+}
