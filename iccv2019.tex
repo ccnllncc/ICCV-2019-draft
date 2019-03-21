@@ -48,7 +48,10 @@
 % egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
 % run, let it finish, and you should be clear).
 \usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
-\usepackage{cleveref}
+\usepackage[capitalise]{cleveref}
+%\Crefname{equation}{Eq.}{Eqs.}
+%\Crefname{figure}{Fig.}{Figs.}
+\Crefname{table}{Tab.}{Tabs.}
 % \iccvfinalcopy % *** Uncomment this line for the final submission
 
 \def\iccvPaperID{954} % *** Enter the ICCV Paper ID here

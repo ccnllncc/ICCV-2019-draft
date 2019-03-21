@@ -7,7 +7,7 @@ In this section, we introduce how we do visual tasks that are in connection with
 
 \subsection{Visual Processing}
 
-In our approach, we build a structure which selects sub-tasks to form a policy based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \Cref{fig:RLplot}.
+In our approach, we build a structure which selects sub-tasks to form a policy based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \cref{fig:RLplot}.
 
 \label{sec-visual-processing}
 \begin{figure}[h]
@@ -55,32 +55,8 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 
 \subsubsection{Visual Task Selection}
 \label{sec-VTS}
-\hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in \Cref{table:visual_tasks}.
+\hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in \cref{table:visual_tasks}.
 
-
-%\begin{table}[th]
-%\centering 
-%\scriptsize
-%
-%\begin{tabular}{|l|ll|l|}
-%\hline
-%visAttr & \multicolumn{1}{l|}{Level}  & Sub-task           & Descriptions                                                                                                                                 \\ \cline{2-4} 
-%        & \multicolumn{1}{l|}{Low}    & Keypoint Module    & \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}To get detailed information of the \\ soccer field $F_{keypoint}$.\end{tabular}}                  \\ \cline{3-3}
-%        & \multicolumn{1}{l|}{}       & Line Module        &                                                                                                                                              \\ \cline{3-3}
-%        & \multicolumn{1}{l|}{}       & Ellipse Module     &                                                                                                                                              \\ \cline{3-4} 
-%        & \multicolumn{1}{l|}{}       & Color Blob Module  & \begin{tabular}[c]{@{}l@{}}To detect blobs of different colors \\ among a region(whole soccer \\ field or a small bounding box).\end{tabular} \\ \cline{2-4} 
-%        & \multicolumn{1}{l|}{Middle} & Location Module    & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ person $P_{location}$.\end{tabular}                                              \\ \cline{3-4} 
-%        & \multicolumn{1}{l|}{}       & Status Module      & \begin{tabular}[c]{@{}l@{}}To get the person's gesture \\ $P_{status}$ (standing, moving, \\ expansion).\end{tabular}                        \\ \cline{3-4} 
-%        & \multicolumn{1}{l|}{}       & Direction Module   & \begin{tabular}[c]{@{}l@{}}To get whether a person is facing \\ the goal or not $P_{direction}$.\end{tabular}                               \\ \cline{3-4} 
-%        & \multicolumn{1}{l|}{}       & Uniform Module     & \begin{tabular}[c]{@{}l@{}}To get the uniform color of the \\ person $P_{uniform}$.\end{tabular}                                              \\ \cline{3-4} 
-%        & \multicolumn{1}{l|}{}       & Soccer Module      & \begin{tabular}[c]{@{}l@{}}To detect the location of the \\ soccer $S_{location}$.\end{tabular}                                              \\ \cline{2-4} 
-%        & \multicolumn{1}{l|}{High}   & Field Part Module  & \begin{tabular}[c]{@{}l@{}}To detect which part of the\\ soccer field is there in the \\ image $F_{part}$ .\end{tabular}                     \\ \hline
-%visGID  &                             & Graph ID Indicator & \begin{tabular}[c]{@{}l@{}}To indicate which type of graph\\ will be used in the following \\process.
-%\end{tabular}                          \\ \hline
-%\end{tabular}
-%\caption{\color{red}Visual Task Pool}
-%\label{table:visual_tasks}
-%\end{table}
 
 %==========Table===================
 \begin{table}[htbp]
@@ -118,7 +94,10 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 \end{table}
 %==========Table===================
 
-The pool is constructed by two parts, the first one is \textit{visAttr} which aims to discover the attribute of people, soccer, field and scene~\cite{peixi2019}, while the other one \textit{visGId} is an indicator showing the current question suits which type of graph. There are three levels of \textit{visAttr}: low, middle and high, which represents the different difficulty level of the vision tasks. 
+The pool is consisted of two parts: the first one is \textit{visAttr} which aims to discover the object attributes, 
+%attribute of people, soccer, field and scene~\cite{peixi2019}, 
+while the other one \textit{visGId} is an indicator showing which type of query graph can correctly represent the current question. %the current question suits which type of query graph. 
+There are three levels of \textit{visAttr}: low, middle and high, which indicates the different difficulty level of the vision tasks. \looseness=-1
 
 
 \eat{
@@ -145,7 +124,8 @@ The pool is constructed by two parts, the first one is \textit{visAttr} which ai
 
 
 
-For each vision task, the approach is not fixed, one task can be achieved by different methods with variety in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture~\cite{peixi2019} ({\color{red}Figure~\ref{fig:Person Status}}). Thus, the system is not only able to determine whether resemble a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section.
+For each vision task, the approach is not fixed, one task can be achieved by different methods with variety in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture~\cite{peixi2019}. %({\color{red}Figure~\ref{fig:Person Status}}). 
+Thus, the system is not only able to determine whether resemble a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section. \looseness=-1
 
 
 \subsubsection{Time and Accuracy Term}
@@ -173,10 +153,8 @@ For each vision task, the approach is not fixed, one task can be achieved by dif
 \noindent where \kw{a_{i}} is the action will take, based on current status. $\pi(\cdot)$ is the policy function that maps status to actions, here, the policy is the probability of outputing next action module $\kw{a_{i}}$ based on current status. And $\ell(\cdot)$ here is the softmax loss based on the whole action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. Since all actions are discrete, which leads to non-differentiable, and back-propagation cannot be used. Policy gradient~\cite{Liu_2017_ICCV} is used here during training. The object function now becomes the combination of policy gradient loss $L_{policy}(\theta)$ with the time-accuracy-balanced loss $L_{\tau\alpha}$, and optimize it by backpropagation for $L_{\tau\alpha}$, while policy gradient for $L_{policy}(\theta)$.
 
 
-\subsection{Construction of \kw{EAG}}
-\label{sec-eag-construction}
 
-After objects that are related to questions are identified, we construct a graph structure, denoted as \kw{EAG}, along the same line as~\cite{peixi2019}. 
+\stitle{Remark}. After objects that are related to questions are identified, one can construct an Entity-Attribute graph, denoted as \kw{EAG}, along the same line as~\cite{peixi2019}. 
 
 
 

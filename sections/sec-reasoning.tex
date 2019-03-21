@@ -73,11 +73,4 @@ Specifically, the inferring of the \emph{scene type} is heavily relied on the ot
 Therefore, our inference graph works in an indirect manner to reason the target information.
 \Cref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the difficult level of the task. First, the role of a detected person is inferred from the first inference graph $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the scene of the query image.
 The scene information is finally fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
-The designed features will be discussed in the experimental section.  
-
-%\begin{figure}[tb!]
-%\centering
-%\includegraphics[width=\columnwidth]{queries.eps}
-%\caption{Query graphs}
-%\label{fig:queries}
-%\end{figure}
+The designed features will be discussed in the next section.  
