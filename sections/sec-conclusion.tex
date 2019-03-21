@@ -4,7 +4,12 @@
 %In this paper we propose an innovative approach for visual query answering task. Differentfrom end-to-end neural network based system, our approach reconstructs inputs as entity-attribute graph and pattern query, based on imageImgand question,respectively. Moreover, the answer is found by graph matching. Reinforcement learning is adopted in our approach to identify optimal policies for guiding visual tasksand to select corresponding pattern query. Last but not the least, our approach is able to reason missing information which is crucial for question answering. Experimental results show that the accuracy of our approach reasonably out performs state-of-the-art methods. Furthermore, the proposed approach is able to balanceeffectiveness and efficiency.
 
 
-In this paper, we proposed an innovative and efficient approach to handle the \vqa problem. In the proposed method, the image and question are converted to entity-attribute graph and pattern query, respectively. Then, the reinforcement learning technique is utilized to select the pattern query that is helpful to the visual tasks, in which the missing attributes are inferred by the inference graph constructed from a Bayes network. Last but not the least, the answer is found by graph matching.
+In this paper, we propose an innovative and efficient approach to handling the \vqa problem. In the proposed method, the inputs (image and question) are first converted into entity-attribute graph and query graph, respectively; then the reinforcement learning based technique is utilized to identify correct query graph and related policies for visual processing; if information extracted from image is not sufficient to answer the question, an inference module will be invoked to infer crucial missing values; the final result will be computed by a module based on graph matching. 
+Experimental studies show that our approach not only owns good generalization and inference ability, but also corroborates the efficiency and high accuracy when compared with other state-of-the-art baseline methods on two private and public \vqa data sets.
+
+The problem of \vqa has been widely studied while with slight satisfaction. We are currently exploring integrating external knowledge base to answer even more complex questions; another topic for future work is to develop techniques to automatically generate query graphs by using query logs.   
+
+\eat{
 The generalization of the proposed scheme is significantly improved by introducing the reinforcement learning and inference graph. 
 More importantly, the inference graph here is used in a novel way to make the graph works adaptively. 
 To be specific, the low-level but unknown information is inferred from the known attributes by the inference network, and the high-level but unknown information is finally inferred when the unknown attributes are well inferred.
@@ -13,3 +18,4 @@ The experimental results encouragingly demonstrate that the proposed scheme corr
 %%The community has study the problem of \vqa many years, 
 The problem of \vqa has been widely studied using the graph manner but with slight satisfaction. 
 The reason may concern the integration of external data with complex reasoning tasks, the improvement of inference scheme, and the interactive strategy.
+}
