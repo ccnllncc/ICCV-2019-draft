@@ -16,7 +16,7 @@ For each dataset, we split it into two parts: Part$_I$, which accounts for 1/3 a
 	\renewcommand{\arraystretch}{1}
 	\begin{center}
 		\footnotesize		
-		\begin{tabular}{c|*{2}{l}}
+		\begin{tabular}{c|c|c}
 			\Xhline{1pt}
 			Id & Question                                           & Difficulty \\ \Xhline{0.7pt}
 			%$Q_{nl_1}$  & Who is this image about?                         & Hard       \\ \hline
@@ -60,7 +60,8 @@ For each dataset, we split it into two parts: Part$_I$, which accounts for 1/3 a
 
 \subsection{Generalization Ability of the Model}
 
-To show the generalization ability of our model, we compared accuracy of our model with state-of-the-art methods CNN+LSTM~\cite{VQA}, HieCoAttenVQA~\cite{Lu2016Hie} and Learning2Reason~\cite{hu2017learning}, via changes of training data. For comparison purpose, we enrich training data with those questions taking the same semantic meaning. For example, besides $Q_{nl5}$, we add following questions: \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}, that have the same semantic meaning as $Q_{nl5}$ in training data. As shown in Table~\ref{table:genralization}, our model always outperforms others, and moreover, is influenced least by varied training data, than other methods. The reason is that the network structure of our model is not fixed, and all the visual task selection is question oriented.
+To show the generalization ability of our model, we compared accuracy of our model with state-of-the-art methods CNN+LSTM~\cite{VQA}, HieCoAttenVQA~\cite{Lu2016Hie} and Learning2Reason~\cite{hu2017learning}, via changes of training data. For comparison purpose, we enrich training data with those questions taking the same semantic meaning. For example, besides $Q_{nl5}$, we add following questions: \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}, that have the same semantic meaning as $Q_{nl5}$ in training data. As shown in Table~\ref{table:genralization}, our model always outperforms others, and moreover, is influenced least by varied training data, than other methods. The reason is that all the visual task selection is question oriented, which leads to unfixed network structure, also, the graph-based method preserves better reasoning capability, comparing with memorizing statistic correlations between images and answers.
+
 
 \eat{
 To test the generalization of our method, we enlarge the training set by more various question with same meaning. For instance, the original question of $Q_{nl5}$ is \textit{"Who is the defending team?"}, we add three more similar question asking \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}. Unlike state-of-the-art methods answering questions in~\cite{peixi2019}, adding generalization and variation in question would not dramatically change the performance, it is because the structure is not fixed, all the visual task selection is query oriented. For~\cite{hu2017learning}, even though the network is not fixed, the answering part is based on neural network, and essentially it also learns the statically correlation, which leads to the weakness in logical reasoning. The result is is shown in Table~\ref{table:genralization}.
@@ -86,7 +87,7 @@ To test the generalization of our method, we enlarge the training set by more va
 Efficiency is one crucial factor to evaluate the performance of a \vqa model. 
 In light of this, we evaluate the running time over accuracy by using state-of-the-art methods CNN+LSTM~\cite{VQA} HieCoAttenVQA~\cite{Lu2016Hie}, Learning2Reason~\cite{hu2017learning} and AllTasks~\cite{peixi2019}. To measure the efficiency of \vqa models, we use ``CPU Time'' to represent the total running time of entire progress of question answering. 
 
-The results shown in \autoref{fig:TimevsAcc} tell us that: (1) state-of-the-art methods perform efficiently, with running time less than 300 milliseconds, while their accuracy are all below 40\%, showing that the methods are not applicable in practice; (2) AllTasks always has the highest and steady accuracy, \eg 65.86\%, since it processes all the visual related tasks without selection, paying the price of unexpected and long running time; and (3) our module finds a balance between efficiency and accuracy. For example, with $\gamma=0.99$, our reinforcement learning based module spends, on average, 680 ms to answer questions, with accuracy 64.02\%, which is 35.88\%, 32.10\% and 26.02\% higher than that of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. Moreover, when running time decreases, the accuracy decreases either, which is as expected.
+The results shown in \Cref{fig:TimevsAcc} tell us that: (1) state-of-the-art methods perform efficiently, with running time less than 300 milliseconds, while their accuracy are all below 40\%, showing that the methods are not applicable in practice; (2) AllTasks always has the highest and steady accuracy, \eg 65.86\%, since it processes all the visual related tasks without selection, paying the price of unexpected and long running time; and (3) our module finds a balance between efficiency and accuracy. For example, with $\gamma=0.99$, our reinforcement learning based module spends, on average, 680 ms to answer questions, with accuracy 64.02\%, which is 35.88\%, 32.10\% and 26.02\% higher than that of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. Moreover, when running time decreases, the accuracy decreases either, which is as expected.
 
 \begin{figure}[h]
 	\begin{center}
@@ -100,7 +101,7 @@ The results shown in \autoref{fig:TimevsAcc} tell us that: (1) state-of-the-art 
 
 
 \eat{
-	\autoref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. For CNN+LSTM, HieCoAttenVQA, and Learning2Reason, their systems work quite efficient with responding time less than 300ms. But the accuracies of these three approaches are lower than 40\%, which is unacceptable. Whereas, the system similar to \cite{peixi2019} outperforms all other methods and reaches 65.86\% accuracy, but it costs much more time. Our approach is able to keep balance between effectiveness and efficiency. For effectiveness, our approach achieves 64.02\% accuracy, which is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. For efficiency, our approach can reduce the inference time by choosing a small value of $\gamma$.
+	\Cref{tab:AccuracyCmp} lists the time cost and accuracy results among different approaches. For CNN+LSTM, HieCoAttenVQA, and Learning2Reason, their systems work quite efficient with responding time less than 300ms. But the accuracies of these three approaches are lower than 40\%, which is unacceptable. Whereas, the system similar to \cite{peixi2019} outperforms all other methods and reaches 65.86\% accuracy, but it costs much more time. Our approach is able to keep balance between effectiveness and efficiency. For effectiveness, our approach achieves 64.02\% accuracy, which is 35.88\%, 32.10\% and 26.02\% higher than results of CNN+LSTM, HieCoAttenVQA, and Learning2Reason, respectively. For efficiency, our approach can reduce the inference time by choosing a small value of $\gamma$.
 	
 	
 	We compare our approach to the state-of-the-art systems, \ie CNN+LSTM~\cite{VQA} HieCoAttenVQA~\cite{Lu2016Hie}, and Learning2Reason~\cite{hu2017learning}. 
@@ -162,7 +163,7 @@ Here $\#\kw{true}\_\kw{value}\_\kw{inferred}$ is the number of all the instances
 \eat{
 \stitle{Accuracy of Role}. 
 
-Based on questions and image characteristics, four variables including $direction$, $status$, $field$, and $unique\_color$ (abbr. $u\_color$) are adopted to calculate conditional probabilities. The inference graph is shown in \autoref{fig:inferGraph}. Note that the domain of variables $direction$, $status$ and $field$ are given in {\color{red}Table ????}, while variable $u\_color$ can have one of two values, to indicate whether a person object has the unique uniform color (=``$U$'') or not (=``$M$'').
+Based on questions and image characteristics, four variables including $direction$, $status$, $field$, and $unique\_color$ (abbr. $u\_color$) are adopted to calculate conditional probabilities. The inference graph is shown in \Cref{fig:inferGraph}. Note that the domain of variables $direction$, $status$ and $field$ are given in {\color{red}Table ????}, while variable $u\_color$ can have one of two values, to indicate whether a person object has the unique uniform color (=``$U$'') or not (=``$M$'').
 
 %==========Table===================
 \begin{table}[htbp]
@@ -183,7 +184,7 @@ Based on questions and image characteristics, four variables including $directio
 \end{table}
 %==========Table===================
 
-Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each person object. The inference accuracy is shown in \autoref{tab:InferAccRole}. It is easy to find that the inference accuracy for role player reaches 99\%, which is highest among all roles. And the accuracies for different roles are all above 85\%.
+Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each person object. The inference accuracy is shown in \Cref{tab:InferAccRole}. It is easy to find that the inference accuracy for role player reaches 99\%, which is highest among all roles. And the accuracy for different roles are all above 85\%.
 
 \stitle{Accuracy of Team Status}
 
@@ -217,7 +218,7 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 \end{table}
 %==========Table===================
 
-\autoref{tab:InferAccTeam} gives the performance of our approach for inferring team status. The accuracy of defending and attacking are above 80\%. To be specific, the accuracy for inferring if a team is attacking achieves 85.1\%, which is higher than the inference accuracy for defending status detection by 3.8\%.
+\Cref{tab:InferAccTeam} gives the performance of our approach for inferring team status. The accuracy of defending and attacking are above 80\%. To be specific, the accuracy for inferring if a team is attacking achieves 85.1\%, which is higher than the inference accuracy for defending status detection by 3.8\%.
 }
 
 
@@ -226,7 +227,7 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 	%\scriptsize
 	\centering	
 	\begin{minipage}[b]{\linewidth}
-		\centerline{\includegraphics[width=0.5\linewidth]{example-image-a}}
+		\centerline{\includegraphics[width=1\linewidth]{attribtes_infGraph}}
 	\end{minipage}\hfill
 	\caption{Attributes of scene inference graph.}
 	\label{fig:AtribSceneGraph}
@@ -234,11 +235,12 @@ Using the conditional probabilities, $VI$ {\color{red}(???)} infers role of each
 %===================== figure ============
 
 
-\stitle{Accuracy of Field Scene}
-Field Scene includes four different scenes, \ie corner kick, free kick, penalty kick and kick-off. Practically, corner kick scene always happens as a single player kick the ball within a one-yard radius of the corner flag and most of players gather in the penalty field. Free kick happens outside the penalty area and defensive wall exists mostly. It is much typical for the penalty kick scene because most of players are out of penalty area except kick player and goalkeeper with football in the penalty spot. As for kick-off scene, the ball is played in the center spot with all members of the opposing team at least 10 yards from the ball. Based on these observations, we design an inference graph in \autoref{fig:AtribSceneGraph}.
+\stitle{Accuracy of Field Scene}. We choose four typical field scenes, \ie corner kick, free kick, penalty kick and kick-off, as  which have distinct scene features. Practically, (1) corner kick scene always shows that a single player kicks the ball within a one-yard radius of the corner flag and most of players gather at the penalty field. (2) Free kick happens with a defensive wall mostly. (3) It is much typical for the penalty kick scene because most of players are out of penalty area except the penalty kicker and goalkeeper with football in the penalty spot. (4) For kick-off scene, the soccer appears in the center spot and is surrounded by players from two opposing teams. Based on these observations, we design an inference graph which is shown in \Cref{fig:AtribSceneGraph}.
 
-
-Inference results are indicated in \autoref{tab:InferAccField} based on inference graph in \autoref{fig:AtribSceneGraph}. As is shown, the inference accuracy of corner kick, free kick, kick-off and penalty kick are 59.57\%, 63.16\%, 85.94\% and 60.00\%, respectively. It is obvious that the scene of kick off reaches the highest accuracy among all.
+Using inference graph shown in Fig.~\ref{fig:AtribSceneGraph}, we have results
+showing accuracy of inference. 
+%Inference results are indicated in \Cref{tab:InferAccField} based on inference graph in \Cref{fig:AtribSceneGraph}. 
+As can be seen, the inference accuracy of corner kick, free kick, kick-off and penalty kick are 59.57\%, 63.16\%, 85.94\% and 60.00\%, respectively, among which the scene of kick off gains the highest inference accuracy.
  
 
 %==========Table===================
@@ -248,16 +250,16 @@ Inference results are indicated in \autoref{tab:InferAccField} based on inferenc
 		\small		
 		\begin{tabular}{c|*{3}{r}}
 			\Xhline{1pt}
-			Field Type & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
+			Scene Type & Precision  & Recall  & Acc \\ \Xhline{0.7pt}
 			Corner-kick &  59.57  &  68.29  &  63.64\\
 			Free-kick  &  63.16  &  58.54  &  60.76\\
 			Kick-off &  85.94  &  82.09  &  83.97\\
 			Penalty-kick  &  60.00  &  60.00  &  60.00\\
 			\Xhline{0.7pt}
-			Ave.  &  71.28  &  70.73  &  70.89\\
+			Avg.  &  71.28  &  70.73  &  70.89\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Inference accuracy of scene type with the proposed approach (\%).
+	\caption{Inference accuracy of four typical scenes (\%).
 		% Here ``Co'', ``Fr'', ``Ki'' and ``Pe'' indicate corner kick, free kick, penalty kick and kick-off, respectively.
 	}
 	\label{tab:InferAccField}
@@ -267,7 +269,7 @@ Inference results are indicated in \autoref{tab:InferAccField} based on inferenc
 %==========Table===================
 
 
-In addition, we compare our approach with NuSVC, MLP, and AdaBoost in \autoref{tab:AccFieldCmp}. The results show that the average accuracy of our approach is higher than that of NuSVC and AdaBoost by 4.49\% and 5.97\% respectively, and slightly better than that of MLP.
+In addition, we compare our approach with NuSVC, MLP, and AdaBoost in \Cref{tab:AccFieldCmp}. The results show that the average accuracy of our approach is higher than that of NuSVC and AdaBoost by 4.49\% and 5.97\% respectively, and slightly better than that of MLP.
 
 %==========Table===================
 \begin{table}[htbp]
@@ -306,7 +308,16 @@ In addition, we compare our approach with NuSVC, MLP, and AdaBoost in \autoref{t
 \label{sec-overall-performance}
 %We use the same question setting as~\cite{peixi2019}, compared the following state-of-the-art methods: \cite{VQA},and~\cite{hu2017learning} with our method ($\gamma$=0.99), the overall performance is shown in Table~\ref{table:stateofart}. 
 
-We compare our proposed method with the following state-of-art methods: LSTM+CNN, HieCoAttenVQA, and Learn2Reason. The results are listed in \autoref{table:stateofartSoc}. The average accuracy using our approach is higher than that of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively. 
+We compare our approach with the following state-of-the-art methods: CNN+LSTM, HieCoAttenVQA, and Learn2Reason, using Soccer and Visual-Genome dataset. 
+Table~\ref{table:stateofartSoc} lists results on Soccer. We find that (1) the average accuracy of our approach is higher than that of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively; (2) our approach is typically effective in answering hard problems, \eg with improvement over 60\% for $Q_{nl6}$. 
+Consider that questions $Q_{nl8}-Q_{nl11}$ are all about field scene, while more than 90\% images of Soccer dataset are categorized as normal scene. For the fair comparison, we extract images that are categorized as one of four field scenes, and apply our approach over this subset of dataset. As shown in Table~\ref{table:stateofartSoc}, our approach substantially outperforms others, which further verifies the advantage our approach preserves. 
+Results on Visual-Genome are given in Table~\ref{table:stateofartVisGen}, from which we find: (1) for ``what'' and ``where'' questions, Learn2Reason performs best, while performances of four methods are quite close; (2) for ``how many'' questions, our method performs much better than others; and (3) the average accuracy our method  surpasses CNN+LSTM, HieCoAttenVQA and Learn2Reason by 12.93\%, 11.74\% and 9.7\%, respectively, which further verifies its advantage. 
+\eat{
+To evaluate the generalization of the proposed scheme, we measure its accuracy on Visual Genome Dataset. Results in \Cref{table:stateofartVisGen} show that our approach can handle different types of questions, and the overall performance of our approach surpasses CNN+LSTM, HieCoAttenVQA and Learn2Reason by 12.93\%, 11.74\% and 9.7\%, respectively.
+}
+\eat{
+The results are listed in \Cref{table:stateofartSoc}. The average accuracy using our approach is higher than that of CNN+LSTM, HieCoAttenVQA and Learn2Reason by 20.35\%, 17.64\% and 15.67\%,  respectively. 
+}
 
 %==========Table===================
 \begin{table}[htbp]
@@ -323,10 +334,14 @@ We compare our proposed method with the following state-of-art methods: LSTM+CNN
 			$Q_{nl5}$ & 49.19    & 49.90         & 30.78        & \textbf{62.58} \\ 
 			$Q_{nl6}$ & 20.56    & 18.70         & 30.0         & \textbf{93.33} \\ 
 			$Q_{nl7}$ & 11.08    & 12.63         & 36.69        & \textbf{50.60} \\\Xhline{0.7pt} 
+			$Q_{nl8}$ &     &           &          &   \\
+			$Q_{nl9}$ &     &           &          &   \\
+			$Q_{nl10}$ &      &           &          &   \\
+			$Q_{nl11}$ &      &           &          &   \\ \Xhline{0.7pt} 
 			Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Accuracy comparison per question and average for Soccer Dataset (\%).}
+	\caption{Performance comparison on Soccer dataset (\%).}
 	\label{table:stateofartSoc}
 	\end{center}
 	\vspace{-3ex}
@@ -348,11 +363,10 @@ We compare our proposed method with the following state-of-art methods: LSTM+CNN
 			Avg.       &  50.48  &  51.67  &  53.71  &  \textbf{63.41}\\
 			\Xhline{1pt}
 		\end{tabular}
-		\caption{Accuracy comparison per question type and average for Visual Genome Dataset (\%).}
+		\caption{Performance comparison on Visual Genome dataset (\%).}
 		\label{table:stateofartVisGen}
 	\end{center}
 	\vspace{-3ex}
 \end{table}
 %==========Table===================
 
-To evaluate the generalization of the proposed scheme, we measure its accuracy on Visual Genome Dataset. Results in \autoref{table:stateofartVisGen} show that our approach can handle different types of questions, and the overall performance of our approach surpasses CNN+LSTM, HieCoAttenVQA and Learn2Reason by 12.93\%, 11.74\% and 9.7\%, respectively.

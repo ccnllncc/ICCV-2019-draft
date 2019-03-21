@@ -7,7 +7,7 @@ In this section, we introduce how we do visual tasks that are in connection with
 
 \subsection{Visual Processing}
 
-In our approach, we build a structure which selects sub-tasks to form a policy which is based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in Figure~\ref{fig:RLplot}.
+In our approach, we build a structure which selects sub-tasks to form a policy based on queries. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \Cref{fig:RLplot}.
 
 \label{sec-visual-processing}
 \begin{figure}[h]
@@ -20,7 +20,7 @@ In our approach, we build a structure which selects sub-tasks to form a policy w
 
 \subsubsection{Multi-layer LSTM with Attention}
 \label{sec-LSTM}
-\hspace{\parindent}The task here is to predict the most suitable action modules sequence $\kw{a}$ by given questions $Q$ and preference $pre$. We form the problem of seeking effective answering strategy of question $Q$ and preference $pre$ as a sequence-to-sequence learning problem with attention mechanism. Inspired by~\cite{Bahdanau2016}, we input word feature of questions $w_i^q$, $i\in\|Q\|$ into a LSTM network which is regarded as an encoder and output $h_i$ as the hidden state for $i$th word in the question. By adding soft attention, the context vector $c_i$ is calculated by the following equations.
+\hspace{\parindent}The task here is to predict the most suitable action module sequence $\kw{A}$ by given a question $Q$ and preference $pre$. We form the problem of seeking effective answering strategy based on question $Q$ and preference $pre$ as a sequence-to-sequence learning problem with attention mechanism. Inspired by~\cite{Bahdanau2016}, we input word feature of question $w_i^q$, $i\in\|Q\|$ into a LSTM network which is regarded as an encoder, and then output $h_i$ as the hidden state for $i$th word in the question. By adding soft attention, the context vector $c_i$ is calculated by the following equations.
 
 
 \begin{small}
@@ -35,14 +35,14 @@ In our approach, we build a structure which selects sub-tasks to form a policy w
 \end{equation}
 \end{small}
 
-\noindent where $h_i$ and $s_j$ are hidden states of encoder and decoder stage, respectively. Here $a_{ij}$ is the attention weights, with higher $a_{ij}$ in $(i, j)$ pair, the more attention will pay in this correlation, thus the $j$th output action $\kw{a}_i$ module will be more influenced by the $i$th input word $w_i^q$ in question. The decode part is similar as traditional recurrent neural networks (RNN). The following steps demonstrates decoding to get the joint distribution of action module sequence $\kw{A} = [\kw{a}_1,\dots,\kw{a}_t]$.
+\noindent where $h_i$ and $s_j$ are hidden states of encoder and decoder stage, respectively. Here $a_{ij}$ is the attention weight, with higher $a_{ij}$ in $(i, j)$ pair, more attention will be paid in this correlation, thus the $j$th action module $\kw{a}_j$ in output will be more influenced by the $i$th input word $w_i^q$ in question. The decode part is similar as traditional recurrent neural network (RNN). The following steps demonstrate the decoding part, aiming to get the joint distribution of the action module sequence $\kw{A} = [\kw{a}_1,\dots,\kw{a}_t]$.
 
 \begin{small}
 \begin{equation} 
-    p(\kw{A}|Q) = \Pi_{t\in\|\kw{A}\|}~p(\kw{a}_t|\{\kw{a}_1,\dots,\kw{a}_t\},c_i,Q)
+    p(\kw{A}|Q) = \Pi_{t\in\|\kw{A}\|}~p(\kw{a}_t|\{\kw{a}_1,\dots,\kw{a}_{t-1}\},c_i,Q)
 \end{equation}
 \begin{equation} 
-    p(\kw{a}_t|\{\kw{a}_1,\dots,\kw{a}_t\},c_i,Q)= g(\kw{a}_{t-1},s_t,c_i,Q)
+    p(\kw{a}_t|\{\kw{a}_1,\dots,\kw{a}_{t-1}\},c_i,Q)= g(\kw{a}_{t-1},s_t,c_i,Q)
 \end{equation}
 \begin{equation} 
     s_t = f(s_{t-1},\kw{a}_{t-1},c_i)
@@ -50,12 +50,12 @@ In our approach, we build a structure which selects sub-tasks to form a policy w
 \end{small}
 \noindent where $g(\cdot)$ is a nonlinear function which outputs the probability of action module \kw{a_{t}}. The probability distribution $p(\kw{A}|Q)$ is used to predict a maximum probability action module sequence by beam search during testing time.
 
-Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, actions are selected from the following visual task pool, and comes into next session, visual task selection (\kw{VTS}).
+Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, actions are selected from the following visual task pool, which is explained in next section, visual task selection (\kw{VTS}).
 
 
 \subsubsection{Visual Task Selection}
 \label{sec-VTS}
-\hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in Table~\ref{table:visual_tasks}.
+\hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in \Cref{table:visual_tasks}.
 
 
 %\begin{table}[th]
@@ -118,7 +118,7 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 \end{table}
 %==========Table===================
 
-The pool is constructed by two parts, the first one is \textit{visAttr} which aims to discover the attribute of people, soccer, field and scene~\cite{peixi2019}, while the other one \textit{visGId} is an indicator showing the current question belongs to which graph type. There are three levels of \textit{visAttr}: low, middle and high, which represents different difficulty degree of the vision tasks. 
+The pool is constructed by two parts, the first one is \textit{visAttr} which aims to discover the attribute of people, soccer, field and scene~\cite{peixi2019}, while the other one \textit{visGId} is an indicator showing the current question suits which type of graph. There are three levels of \textit{visAttr}: low, middle and high, which represents the different difficulty level of the vision tasks. 
 
 
 \eat{
@@ -145,7 +145,7 @@ The pool is constructed by two parts, the first one is \textit{visAttr} which ai
 
 
 
-For each vision task, the approach is not fixed, one task can be achieved by different methods with variance in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture (Figure~\ref{fig:Person Status}). Thus, the system is not only able to determine whether resembles a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section.
+For each vision task, the approach is not fixed, one task can be achieved by different methods with variety in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture~\cite{peixi2019} ({\color{red}Figure~\ref{fig:Person Status}}). Thus, the system is not only able to determine whether resemble a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section.
 
 
 \subsubsection{Time and Accuracy Term}
@@ -162,7 +162,7 @@ For each vision task, the approach is not fixed, one task can be achieved by dif
 
 \subsubsection{Monte Carlo Methods}
 \label{sec-MC}
-\hspace{\parindent} The task now becomes a policy learning problem. Given a question and preference, output a policy containing a sequence of actions $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. There is no ground truth for each steps, but only a final reward indicates that whether the prediction result is correct based on current policy. We involve the concept of Monte Carlo Methods to learn the policy which guides the vision tasks, and such policy network requires an extra reward value in loss.
+\hspace{\parindent} The task now becomes a policy learning problem. Given a question and preference, output a policy containing a sequence of actions $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. There is no ground truth for each steps, but only a final reward indicates that whether the prediction result is correct based on current policy. We involve the concept of Monte Carlo Methods to learn the policy which will guide the vision tasks. Such policy network requires an extra reward value in loss.
 
 \begin{small}
 \begin{equation} 
