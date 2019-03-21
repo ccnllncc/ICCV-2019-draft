@@ -60,7 +60,7 @@ For each dataset, we split it into two parts: Part$_I$, which accounts for 1/3 a
 
 \subsection{Generalization Ability of the Model}
 
-To show the generalization ability of our model, we compared accuracy of our model with state-of-the-art methods CNN+LSTM~\cite{VQA}, HieCoAttenVQA~\cite{Lu2016Hie} and Learning2Reason~\cite{hu2017learning}, via changes of training data. For comparison purpose, we enrich training data with those questions taking the same semantic meaning. For example, besides $Q_{nl5}$, we add following questions: \textit{Who is attacking team?}, \textit{"What is the uniform color of the defending team?"} and \textit{"What is the uniform color of the attacking team?"}, that have the same semantic meaning as $Q_{nl5}$ in training data. As shown in \cref{table:genralization}, our model always outperforms others, and moreover, is influenced least by varied training data, than other methods. The reason is that all the visual task selection is question oriented, which leads to unfixed network structure, also, the graph-based method preserves better reasoning capability, comparing with memorizing statistic correlations between images and answers.
+To show the generalization ability of our model, we compared accuracy of our model with state-of-the-art methods CNN+LSTM~\cite{VQA}, HieCoAttenVQA~\cite{Lu2016Hie} and Learning2Reason~\cite{hu2017learning}, via changes of training data. For comparison purpose, we enrich training data with those questions taking the same semantic meaning. For example, besides $Q_{nl5}$, we add following questions: \textit{``Who is attacking team?''}, \textit{``What is the uniform color of the defending team?''} and \textit{``What is the uniform color of the attacking team?''}, that have the same semantic meaning as $Q_{nl5}$ in training data. As shown in \cref{table:genralization}, our model always outperforms others, and moreover, is influenced least by varied training data, than other methods. The reason is that all the visual task selection is question oriented, which leads to unfixed network structure, also, the graph-based method preserves better reasoning capability, comparing with memorizing statistic correlations between images and answers.
 
 
 \eat{
@@ -146,16 +146,15 @@ The results shown in \cref{fig:TimevsAcc} tell us that: (1) state-of-the-art met
 Accuracy is another crucial performance criteria of \vqa systems. In contrast to end-to-end systems, the accuracy of our model is partly influenced by the inference quality. Hence, it is of great importance to see how accuracy is influenced by our inference module (\kw{VI}). Prior work~\cite{peixi2019} already showed performance of their inference module \wrt a set of fixed questions on Soccer dataset. Here, we learn an inference graph for questions $Q_{nl8},Q_{nl9},Q_{nl10}$ and $Q_{nl11}$ regarding field scene from Soccer dataset, and a set of inference graphs for answering questions on Visual-Genome dataset. \looseness=-1
 
 To evaluate accuracy, we follow F-measure~\cite{Fmeasure}, and define our accuracy metric as following:
-
-
-\noindent $\kw{Acc}=2\cdot (\kw{recall}\cdot \kw{precision})~/~(\kw{recall}+\kw{precision})$;
-
-\noindent $\kw{recall}=\#\kw{true}\_\kw{value}\_\kw{inferred}~/~\#\kw{true}\_\kw{value}\_\kw{instance}$;
-
-\noindent $\kw{precision}=\#\kw{true}\_\kw{value}\_\kw{inferred}~/~\#\kw{inferred}\_\kw{instance}$.
-
-
-Here $\#\kw{true}\_\kw{value}\_\kw{inferred}$ is the number of all the instances, whose attribute $A$ is inferred correctly as $``v"$,  $\#\kw{true}\_\kw{value}\_\kw{instance}$ is the number of all the instances with attribute $A$ of value $``v"$, and $\#\kw{inferred}\_\kw{instance}$ indicates the total number of instances whose attribute $A$ is inferred as $``v"$. \looseness=-1
+\begin{equation*}
+\kw{Acc}=\frac{2\cdot (\kw{recall}\cdot \kw{precision})}{(\kw{recall}+\kw{precision})}
+\end{equation*}
+where:
+\begin{equation*}
+\scriptsize
+\kw{recall}= \frac{\#\kw{true}\_\kw{value}\_\kw{inferred}}{\#\kw{true}\_\kw{value}\_\kw{instance}},~ \kw{precision}=\frac{\#\kw{true}\_\kw{value}\_\kw{inferred}}{\#\kw{inferred}\_\kw{instance}}
+\end{equation*}
+Here, $\#\kw{true}\_\kw{value}\_\kw{inferred}$ is the number of all the instances, whose attribute $A$ is inferred correctly as $``v"$,  $\#\kw{true}\_\kw{value}\_\kw{instance}$ is the number of all the instances with attribute $A$ of value $``v"$, and $\#\kw{inferred}\_\kw{instance}$ indicates the total number of instances whose attribute $A$ is inferred as $``v"$. \looseness=-1
 
 
 
@@ -341,7 +340,7 @@ The results are listed in \cref{table:stateofartSoc}. The average accuracy using
 			Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{Performance comparison on Soccer dataset (\%).}
+	\caption{\color{red}Performance comparison on Soccer dataset (\%).}
 	\label{table:stateofartSoc}
 	\end{center}
 	\vspace{-3ex}
