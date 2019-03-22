@@ -27,13 +27,13 @@ For each dataset, we split it into two parts: Part$_I$, which accounts for 1/3 a
 			$Q_{nl_5}$  & Who is the defending team?                         & Medium       \\ \hline
 			$Q_{nl_6}$  & Which part of the field are the players being now? & Hard       \\ \hline
 			$Q_{nl_7}$  & How many players are there in the image?           & Hard     \\ \hline
-			$Q_{nl_8}$  & Is this image about corner kick?                   & 
+			$Q_{nl_8}$  & {\color{red}Is this image about corner kick?}                   & 
 			\\ \hline
-			$Q_{nl_9}$  & Is this image about free kick?                     & 
+			$Q_{nl_9}$  & Is this image about penalty kick?                   & 
 			\\ \hline
-			$Q_{nl_{10}}$  & Is this image about kick off?                  & 
+			$Q_{nl_10}$  & Is this image about kick off?                     & 
 			\\ \hline
-			$Q_{nl_{11}}$  &  Is this image about penalty kick?             &
+			$Q_{nl_{11}}$  & Is this image about free kick?                  & 
 			\\ \hline
 			\eat{
 			\multirow{2}{*}{$Q_{nl_8}$ }
@@ -333,15 +333,15 @@ The results are listed in \cref{table:stateofartSoc}. The average accuracy using
 			$Q_{nl5}$ & 49.19    & 49.90         & 30.78        & \textbf{62.58} \\ 
 			$Q_{nl6}$ & 20.56    & 18.70         & 30.0         & \textbf{93.33} \\ 
 			$Q_{nl7}$ & 11.08    & 12.63         & 36.69        & \textbf{50.60} \\\Xhline{0.7pt} 
-			$Q_{nl8}$ &     &           &          &  81.58 \\
-			$Q_{nl9}$ &     &           &          & 89.47  \\
-			$Q_{nl10}$ &      &           &          & 92.11  \\
-			$Q_{nl11}$ &      &           &          & 	89.47   \\ \Xhline{0.7pt} 
+			$Q_{nl8}$ &72.43&75.14&80.15&\textbf{81.58}\\
+			$Q_{nl9}$ &75.66&77.91&85.17&\textbf{89.47}\\
+			$Q_{nl10}$ &77.94&76.83&81.23&\textbf{92.11}\\
+			$Q_{nl11}$ &74.51&77.17&84.93&\textbf{89.47}\\ \Xhline{0.7pt} 
 			%Avg.       & 46.40    & 49.11         & 51.08        & \textbf{66.75} \\
-			Avg.       & xx    & xx         & xx        & \textbf{xx} \\
+			Avg. & 55.63 & 57.51  & 55.24  & 	\textbf{74.53 }\\
 			\Xhline{1pt}
 		\end{tabular}
-	\caption{\color{red}Performance comparison on Soccer dataset (\%).}
+	\caption{Performance comparison on Soccer dataset (\%).}
 	\label{table:stateofartSoc}
 	\end{center}
 	\vspace{-3ex}

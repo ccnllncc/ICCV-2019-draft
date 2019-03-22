@@ -38,7 +38,7 @@ similarly for values $d_1$ and $d_2$ if $d_1=d_2$.
 }%20190305
 
 
-An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. \cref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
+An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. \Cref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
 
 \stitle{Query Graphs.}  A query graph $Q(u_o)$ is a set of triples
 $(s_Q, p_Q, o_Q)$, where $s_Q$ is either a variable $z$ or a function $f(z)$ taking $z$ as parameter, $o_Q$ is one of a value $d$ or $z$ or $f(z)$, and $p_Q$ is a predicate in ${\cal P}$. Here function $f(z)$ is defined by users, and variable $z$ has one
@@ -53,7 +53,7 @@ that two variables are represented as the same node if they
 have the same name of $y$, $y*$ or $\_y$; similarly for functions $f(z)$ and values $d$.
 We assume \kwlog that $Q(x)$ is connected, \ie there exists
 an undirected path between $u_o$ and each node in $Q(u_o)$.
-In particular, $u_o$ is a designated node in $Q(u_o)$, denoting the query focus and labeled by ``?''. %denoting an entity. Introduce functions.  \looseness=-1
+In particular, $u_o$ is a designated node in $Q(u_o)$, {\color{red}denoting the query focus and labeled by ``?''}. %denoting an entity. Introduce functions.  \looseness=-1
 Take \cref{fig-overview} (c) as example. It depicts a query graph that is generated from query ``{\em How many players are there in the image?}''. Note that the ``query focus'' $u_o$ carries a function \kw{num}() that calculates the total number of {\em person} entities with {\em role} ``player''. 
 
 
