@@ -5,7 +5,7 @@
 \begin{figure*}[tb!]
 \vspace{-1ex}
 \centerline{\includegraphics[scale=0.28]{overview.eps}}
-\caption{\color{red}Overview of our approach, and graph-based representation of images and questions} \label{fig-overview}
+\caption{Overview of our approach, and graph-based representation of images and questions} \label{fig-overview}
 \vspace{-2ex}
 \end{figure*}
 %%%%%%%%%%%%%%%%
@@ -38,7 +38,9 @@ similarly for values $d_1$ and $d_2$ if $d_1=d_2$.
 }%20190305
 
 
-An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. \Cref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
+An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. 
+\eat{\Cref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
+}
 
 \stitle{Query Graphs.}  A query graph $Q(u_o)$ is a set of triples
 $(s_Q, p_Q, o_Q)$, where $s_Q$ is either a variable $z$ or a function $f(z)$ taking $z$ as parameter, $o_Q$ is one of a value $d$ or $z$ or $f(z)$, and $p_Q$ is a predicate in ${\cal P}$. Here function $f(z)$ is defined by users, and variable $z$ has one
@@ -54,7 +56,8 @@ have the same name of $y$, $y*$ or $\_y$; similarly for functions $f(z)$ and val
 We assume \kwlog that $Q(x)$ is connected, \ie there exists
 an undirected path between $u_o$ and each node in $Q(u_o)$.
 In particular, $u_o$ is a designated node in $Q(u_o)$, {\color{red}denoting the query focus and labeled by ``?''}. %denoting an entity. Introduce functions.  \looseness=-1
-Take \cref{fig-overview} (c) as example. It depicts a query graph that is generated from query ``{\em How many players are there in the image?}''. Note that the ``query focus'' $u_o$ carries a function \kw{num}() that calculates the total number of {\em person} entities with {\em role} ``player''. 
+
+%Take \cref{fig-overview} (c) as example. It depicts a query graph that is generated from query ``{\em How many players are there in the image?}''. Note that the ``query focus'' $u_o$ carries a function \kw{num}() that calculates the total number of {\em person} entities with {\em role} ``player''. 
 
 
 \subsection{Approach Overview}
@@ -74,6 +77,6 @@ Take \cref{fig-overview} (c) as example. It depicts a query graph that is genera
 Along the same lines as representations for images and questions, and graph pattern matching for question answering, raised in~\cite{peixi2019}, we propose a comprehensive approach as modeling of the \vqa problem. %answer a set of typical questions regarding soccer matches. 
 }
 
-\Cref{fig-overview} (a) presents the overview of our approach. In a nutshell, our approach takes an image and a natural language question $Q_{NL}$ as input, and answers questions with seven modules as following. (1) Upon receiving a question $Q_{NL}$, module \kw{QVS} identifies a set of visual tasks that are query-oriented and category of the query graph that corresponds to the input question, and passes tasks and category to modules \kw{VTP} and \kw{QGC}, respectively. (2) Guided by the list of tasks, module \kw{VTP} conducts visual tasks over the input image, and returns identified objects along with their attributes to module \kw{VGC}. (3) Module $\kw{VGC}$ constructs an entity-attribute graph $\eag$, by using identified objects and their attributes. Note that $\eag$ may be incomplete and hence unable to answer questions. (4) When $\eag$ is incomplete, module \kw{VI} infers missing value with a classifier $G_I$, denoted as {\em inference graph}, and produces an updated \kw{EAG} for question answering. (5) Module \kw{QGC} takes category of the query graph as input, and generates a query graph $Q(u_o)$. (6) After $Q(u_o)$ and $\eag$ are generated, module $\kw{GM}$ is invoked for matching computation, and returns final result. (7) In contrast to online computation that are processed by above modules, the module \kw{IGC} constructs {\em inference graphs} using labeled training data, offline. \looseness=-1
+\Cref{fig-overview} (a) presents the overview of our approach. In a nutshell, our approach takes an image and a natural language question $Q_{NL}$ as input, and answers questions with seven modules as following. (1) Upon receiving a question $Q_{NL}$, module \kw{QVS} identifies a set of visual tasks that are query-oriented and category of the query graph that corresponds to the input question, and passes tasks and category to modules \kw{VTP} and \kw{QGC}, respectively. (2) Guided by the list of tasks, module \kw{VTP} conducts visual tasks over the input image, and returns identified objects along with their attributes to module \kw{VGC}. (3) Module $\kw{VGC}$ constructs an entity-attribute graph $\eag$, using the identified objects and their attributes. Note that $\eag$ may be incomplete and hence unable to answer questions. (4) When $\eag$ is incomplete, module \kw{VI} infers missing value with a classifier $G_I$, denoted as {\em inference graph}, and produces an updated \kw{EAG} for question answering. (5) Module \kw{QGC} takes category of the query graph as input, and generates a query graph $Q(u_o)$. (6) After $Q(u_o)$ and $\eag$ are generated, module $\kw{GM}$ is invoked for matching computation, and returns final result. (7) In contrast to online computation that are processed by above modules, the module \kw{IGC} constructs {\em inference graphs} using labeled training data, offline. \looseness=-1
 
 As some modules employ existing techniques, to emphasize our contribution, we will elaborate modules $\kw{QVS}$ and $\kw{VTP}$ in Section~\ref{sec-reinforcement-learning}, and modules \kw{VI} in Section~\ref{sec-reasoning}, with more details. \looseness=-1

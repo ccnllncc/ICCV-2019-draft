@@ -7,25 +7,34 @@ problem of automatically and efficiently answering questions about visual conten
 Though important, the \vqa problem brings a rich set of challenges spanning various domains such as computer vision, natural language processing, knowledge representation, and reasoning. 
 In recent years, \vqa has achieved significant
 progress, owing to the development of deep architectures suited for this task and the creation of large \vqa datasets to train these models. 
-However, a number of studies~\cite{peixi2019,Goyal_2017} also pointed out that despite recent progress, today's neural network based approaches demonstrate a few weaknesses, which greatly hinders its further development. First of all, existing techniques train deep neural networks to predict answers, where image-question pairs are jointly embedded as training data, following this way, the correlation between the question and the image is ignored, which may lead to difficulty in balancing accuracy and efficiency. Secondly, deep neural networks works as ``black boxes'', it is very hard to identify the causal relations between network design and system performance, not to mention ensuring acceptable performance. Lastly, due to lack of reasoning capability, a host of existing techniques show poor performance when answering real-life questions, that are often open-ended and require necessary reasoning. Though a novel method~\cite{peixi2019} with reasoning capability is proposed, the method shows difficulty in generalization.  
+However, a number of studies~\cite{peixi2019,Goyal_2017} also pointed out that despite recent progress, today's neural network based approaches demonstrate a few weaknesses, which greatly hinders its further development. First of all, existing techniques train deep neural networks to predict answers, where image-question pairs are jointly embedded as training data, following this way, the correlation between the question and the image is ignored, which may lead to poor performance in balancing accuracy and efficiency. Secondly, deep neural networks works as ``black boxes'', it is very hard to identify the causal relations between network design and system performance, not to mention ensuring acceptable performance. Lastly, due to lack of reasoning capability, a host of existing techniques show poor performance when answering real-life questions, that are often open-ended and require necessary reasoning. Though a novel method~\cite{peixi2019} with reasoning capability is proposed, the method shows difficulty in generalization.  
 
 To address the issues mentioned above, a method, that finds answers based on the understanding of the questions and necessary reasoning, is required. 
 
 
 \begin{figure}[tb]
 \centering
-\includegraphics[width=\columnwidth]{figures/motivation.eps}
+\includegraphics[width=\columnwidth]{motivation-new}
 \caption{The image is about soccer match, where each person object is associated with attributes: id, uniform color, status (\underline{S}tanding, \underline{M}oving, \underline{E}xpansion), direction (\underline{B}acking, \underline{F}acing, \underline{N/A}), as well as location, and the soccer object is attributed with location. However, not all informations are necessary in answering one question, visual tasks are selected to achieve acquiring relevant information.%Part (b) shows a part of corresponding entity-attribute graph. Part (c) exhibits a $\nlq$ and its corresponding query graph $Q$. 
 }
 \vspace{-4ex}
 \label{fig:example}
 \end{figure}
 
+% Fig. 1: raw 
+%\begin{figure}[tb]
+%	\centering
+%	\includegraphics[width=\columnwidth]{motivation-raw}
+%	\caption{The image is about soccer match, where each person object is associated with attributes: id, uniform color, status (\underline{S}tanding, \underline{M}oving, \underline{E}xpansion), direction (\underline{B}acking, \underline{F}acing, \underline{N/A}), as well as location, and the soccer object is attributed with location. However, not all informations are necessary in answering one question, visual tasks are selected to achieve acquiring relevant information.%Part (b) shows a part of corresponding entity-attribute graph. Part (c) exhibits a $\nlq$ and its corresponding query graph $Q$. 
+%	}
+%	\vspace{-4ex}
+%	\label{fig:example}
+%\end{figure}
 
 \begin{example}
 \Cref{fig:example} depicts an image about a soccer match, where each object is associated with a set of attributes. A typical question may ask ``How many players are there in the image?''. Though simple, it is a challenging task to efficiently answer the query, since (1) traditionally, it often takes time to extract as much information as possible from the given image, and then answer the questions; while, only question related objects are needed; (2) information extracted from image alone is often insufficient to answer questions, hence missing values that are crucial for question answering should be inferred by certain reasoning techniques. \looseness=-1
 
-To tackle the issues, one may (1) model input \ie image and question, with graph structures that can capture information from both image and question well, and ease question understanding and reasoning; (2) follow the work-flow given on the right hand side of \cref{fig:example} to identify correct graph representation of the question, and a set of policies that are closely related to the question and used to guide forthcoming visual tasks; and (3) infer values \eg ``role'' of person objects (referee, goalkeeper or player) using well trained classification model.  
+To tackle the issues, one may (1) model input \ie image and question, with graph structures that can capture information from both image and question well, and ease question understanding and reasoning; (2) follow the work-flow given on the right hand side of \cref{fig:example} to identify correct graph representation of the question, as well as a set of policies that are closely related to the question and used to guide forthcoming visual tasks; and (3) infer values \eg ``role'' of person objects (referee, goalkeeper or player) using well trained classification model.  
 \end{example}
 
 This example suggests that we address the \vqa problem by modeling inputs as graphs, leveraging techniques to guide question translation, visual processing, and do reasoning. While to do this, two critical questions have to be answered. (1) How to understand questions and carry out question related visual tasks? (2) How to infer crucial information to assist question answering?  

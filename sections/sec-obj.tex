@@ -7,16 +7,16 @@ In this section, we introduce how we do visual tasks that are in connection with
 
 \subsection{Visual Processing}
 
-In our approach, we build a structure which selects sub-tasks to form a query-based policy. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \cref{fig:RLplot}. \eat{\cref{fig:RLplot}} %To keep consistent  between the reference and corresponding caption in the whole paper, use 'Table' rather than 'table', use 'Figure' rather than 'fig'
+In our approach, we build a structure which selects sub-tasks to form a query-based policy. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \cref{fig-overview} (b). \eat{\cref{fig:RLplot}} %To keep consistent  between the reference and corresponding caption in the whole paper, use 'Table' rather than 'table', use 'Figure' rather than 'fig'
 
 \label{sec-visual-processing}
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=\linewidth]{RLplot.pdf}
-\end{center}
-\caption{Visual Processing Strategy}
-\label{fig:RLplot}
-\end{figure}
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[width=\linewidth]{RLplot.pdf}
+%\end{center}
+%\caption{Visual Processing Strategy}
+%\label{fig:RLplot}
+%\end{figure}
 
 \subsubsection{Multi-layer LSTM with Attention}
 \label{sec-LSTM}
