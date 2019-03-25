@@ -8,7 +8,7 @@ an inference graph is required.
 We briefly introduce the construction below. 
 
 \subsection{Construction of Inference Graph}
-To take advantage of the prior information and increase the generalization ability of the proposed model, our inference graph is constructed using Bayesian network.
+To take advantage of the prior information and increase the generalization ability of the proposed model, and inspired by~\cite{peixi2019}, our inference graph is constructed using Bayesian network.
 Mathematically, Bayesian network \cite{friedman1997bayesian} can be described by a pair $\mathfrak{B}=<\mathcal{G},\varTheta_\mathcal{G}>$. 
 Here, the notation $\mathcal{G}$ is a directed acyclic graph, of which the $i$-th vertex corresponds to a random variable $X_i$, and the edge between two connected vertexes indicates the dependency. 
 Additionally, the second item $\varTheta_\mathcal{G}$ is a set of parameters used to quantify the dependencies in $\mathcal{G}$.
@@ -58,7 +58,7 @@ P_\mathfrak{B}(Y| {X}) = c \cdot \theta_Y \prod_{i=1}^{n}\theta_{X_i|Y}
 \end{equation}
 where $c$ is a scale factor that makes the calculation being a distribution: $c=\sum_{y'\in \mathcal{Y}}  \theta_{y'} \prod_{i=1}^{n}\theta_{X_i|y'}$.
 
-One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, this simple model works excellently to our problem. 
+One can observe from Eq.\eqref{eq:BN-naiveBayes} that Na\"{i}ve Bayes simplifies the complexity of Bayesian network. As can be validated by the experimental results, this simple model works excellently for our problem. 
 
 In the area of \vqa, some simple questions may need the implicit attributes to help the answering system to find out the correct answer. 
 Taking the soccer scene as description,
@@ -71,6 +71,6 @@ In this case, three target attributes are involved: the \emph{role} of any detec
 %And the value of \emph{scene type} may be one of \emph{corner kick}, \emph{free kick}, \emph{kick off}, and \emph{penalty kick}.
 Specifically, the inferring of the \emph{scene type} is heavily relied on the other two hidden attributes: the \emph{role} of a detected person and the \emph{team status}. 
 Therefore, our inference graph works in an indirect manner to reason the target information.
-\Cref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the difficult level of the task. First, the role of a detected person is inferred from the first inference graph $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information can be directly detected from the scene image, to infer the information of the scene of the query image.
+\Cref{fig:inferGraphWork} summarizes the processes of our inference graph, where three graphs are constructed according to the difficult level of the task. First, the role of a detected person is inferred from the first inference graph $G_1$, in which four different kinds of features are extracted from the scene image. Then, the team status is inferred through the second inference graph $G_2$, but with different features as input. Next, we use the inferred information, along with the other information that can be directly detected from the scene image, to infer the information of the scene of the query image.
 The scene information is finally fed into the incomplete \kw{EAG} so that a complete \kw{EAG} can be obtained. 
-The designed features will be discussed in the next section.  
+%The designed features will be discussed in the next section.  

@@ -1,14 +1,14 @@
 \section{Overview of the Approach}
 \label{sec-overview}
 
-%%%%%%%%%%%%%%%
-\begin{figure*}[tb!]
+\eat{
+\begin{figure*}[tb!] %tb!
 \vspace{-1ex}
-\centerline{\includegraphics[scale=0.28]{overview.eps}}
+\centerline{\includegraphics[width=\columnwidth]{overview.pdf}}
 \caption{Overview of our approach, and graph-based representation of images and questions} \label{fig-overview}
 \vspace{-2ex}
 \end{figure*}
-%%%%%%%%%%%%%%%%
+}
 
 We start from representations of images and questions, followed by the overview of our approach.
 
@@ -16,7 +16,8 @@ We start from representations of images and questions, followed by the overview 
 \subsection{Representation of Images and Questions}
 \label{sec-representation}
 
-We use the same representations as~\cite{peixi2019}. To make the paper self-contained, we cite them as follows (rephrased). 
+\eat{We use the same representations as~\cite{peixi2019}. To make the paper self-contained, we cite them as follows (rephrased).} 
+We adopt a similar representation as in~\cite{peixi2019}. To make this paper self-contained, we briefly describe it as follows.
 
 \stitle{Entity-Attribute Graphs.} Entities are typically defined as objects or concepts that exist in the real world. An entity often carries attributes, that describe features of the entity. \looseness=-1
 
@@ -38,7 +39,7 @@ similarly for values $d_1$ and $d_2$ if $d_1=d_2$.
 }%20190305
 
 
-An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer queries. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. 
+An image can be represented as an \kw{EAG} with detected objects along with their detected attributes, and relationships among objects. This can be achieved via a few visual tasks. While \kw{EAG} generated directly after image processing is often incomplete, \ie it may miss some crucial information to answer questions. We hence refer to {\em entity-attribute graphs} with incomplete information as {\em incomplete entity-attribute graphs}, and associate nodes with white rectangles, to indicate the missing value of an entity or attribute in \kw{EAG}. \looseness=-1
 \eat{\Cref{fig:example}(b) is an {\em incomplete entity-attribute graph}, in which square nodes representing person roles are associated with white rectangle. 
 }
 
@@ -55,7 +56,7 @@ that two variables are represented as the same node if they
 have the same name of $y$, $y*$ or $\_y$; similarly for functions $f(z)$ and values $d$.
 We assume \kwlog that $Q(x)$ is connected, \ie there exists
 an undirected path between $u_o$ and each node in $Q(u_o)$.
-In particular, $u_o$ is a designated node in $Q(u_o)$, {\color{red}denoting the query focus and labeled by ``?''}. %denoting an entity. Introduce functions.  \looseness=-1
+In particular, $u_o$ is a designated node in $Q(u_o)$, denoting the query focus and labeled by ``*''. %denoting an entity. Introduce functions.  \looseness=-1
 
 %Take \cref{fig-overview} (c) as example. It depicts a query graph that is generated from query ``{\em How many players are there in the image?}''. Note that the ``query focus'' $u_o$ carries a function \kw{num}() that calculates the total number of {\em person} entities with {\em role} ``player''. 
 

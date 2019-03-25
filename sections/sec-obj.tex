@@ -7,7 +7,7 @@ In this section, we introduce how we do visual tasks that are in connection with
 
 \subsection{Visual Processing}
 
-In our approach, we build a structure which selects sub-tasks to form a query-based policy. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module} and \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by operating relevant vision tasks. An overview is shown in \cref{fig-overview} (b). \eat{\cref{fig:RLplot}} %To keep consistent  between the reference and corresponding caption in the whole paper, use 'Table' rather than 'table', use 'Figure' rather than 'fig'
+In our approach, we build a structure which selects sub-tasks to form a query-based policy. For instance, with the input \textit{which is the defending team?}, the system first predicts the corresponding visual action sequence, which are \textit{Human Module}, \textit{Gesture Module}, \textit{Direction Module}, \textit{Soccer Module}, \textit{Color Blob Module}, \textit{Field Part Module}, followed by the prediction of \textit{Graph Indicator}. Guided by such sequence, the image features are then extracted by performing relevant vision tasks. An overview is shown in \Cref{fig-overview} (b). \eat{\Cref{fig:RLplot}} 
 
 \label{sec-visual-processing}
 %\begin{figure}[h]
@@ -20,7 +20,7 @@ In our approach, we build a structure which selects sub-tasks to form a query-ba
 
 \subsubsection{Multi-layer LSTM with Attention}
 \label{sec-LSTM}
-\hspace{\parindent}The task here is to predict the most suitable action module sequence $\kw{A}$ by given a question $Q$ and preference $pre$. We form the problem of seeking effective answering strategy based on question $Q$ and preference $pre$ as a sequence-to-sequence learning problem with attention mechanism. Inspired by~\cite{Bahdanau2016}, we input word feature of question $w_i^q$, $i\in\|Q\|$ into a LSTM network which is regarded as an encoder, and then output $h_i$ as the hidden state for $i$th word in the question. By adding soft attention, the context vector $c_i$ is calculated by the following equations.
+\hspace{\parindent}The task here is to predict the most suitable action module sequence $\kw{A}$ given a question $Q$ and preference $pre$. We form the problem of seeking effective answering strategy based on question $Q$ and preference $pre$ as a sequence-to-sequence learning problem with attention mechanism. Inspired by~\cite{Bahdanau2016}, we input word feature of question $w_i^q$, $i\in\|Q\|$ into a LSTM network which is regarded as an encoder, and then output $h_i$ as the hidden state for $i$th word in the question. By adding soft attention, the context vector $c_i$ is calculated by the following equations.
 
 
 \begin{small}
@@ -35,7 +35,7 @@ In our approach, we build a structure which selects sub-tasks to form a query-ba
 \end{equation}
 \end{small}
 
-\noindent where $h_i$ and $s_j$ are hidden states of encoder and decoder stage, respectively. Here $a_{ij}$ is the attention weight, with higher $a_{ij}$ in $(i, j)$ pair, more attention will be paid in this correlation, thus the $j$th action module $\kw{a}_j$ in output will be more influenced by the $i$th input word $w_i^q$ in question. The decode part is similar as traditional recurrent neural network (RNN). The following steps demonstrate the decoding part, aiming to get the joint distribution of the action module sequence $\kw{A} = [\kw{a}_1,\dots,\kw{a}_t]$.
+\noindent where $h_i$ and $s_j$ are hidden states of encoder and decoder stage, respectively. Here $a_{ij}$ is the attention weight, where the higher $a_{ij}$ in $(i,j)$ pair is, the more attention will be paid in this correlation, thus the $j$th action module $\kw{a}_j$ in output will be more influenced by the $i$th input word $w_i^q$ in question. The decode part is similar as traditional recurrent neural network (RNN). The following steps demonstrate the decoding part, aiming to get the joint distribution of the action module sequence $\kw{A} = [\kw{a}_1,\dots,\kw{a}_t]$.
 
 \begin{small}
 \begin{equation} 
@@ -55,7 +55,7 @@ Guided by this action sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, ac
 
 \subsubsection{Visual Task Selection}
 \label{sec-VTS}
-\hspace{\parindent}\kw{VTS} is guided by the question feature, selecting target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in \cref{table:visual_tasks}.
+\hspace{\parindent}\kw{VTS} is guided by the question feature, and selects target visual tasks from the visual task pool by Monte Carlo learning. The task pool is demonstrated in \Cref{table:visual_tasks}.
 
 
 %==========Table===================
@@ -124,8 +124,8 @@ There are three levels of \textit{visAttr}: low, middle and high, which indicate
 
 
 
-For each vision task, the approach is not fixed, one task can be achieved by different methods with variety in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them is able to localize and distinguish people who are moving, standing or with an expansion gesture~\cite{peixi2019}. %({\color{red}Figure~\ref{fig:Person Status}}). 
-Thus, the system is not only able to determine whether resemble a vision task module into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. For the preference, it is clarified in the next section. \looseness=-1
+For each vision task, the approach is not fixed, one task can be achieved by different methods with variety in time and accuracy. For instance, object detection based methods, like Faster R-CNN~\cite{Ren:2015:FRT:2969239.2969250}, R-FCN~\cite{DBLP:conf/nips/DaiLHS16}, SSD~\cite{DBLP:conf/eccv/LiuAESRFB16} or skeleton keypoints detection based method like~\cite{cao2017realtime} and~\cite{wei2016cpm} can be implemented as a set of status module methods, because all of them are able to localize and distinguish people who are moving, standing or with an expansion gesture~\cite{peixi2019}. %({\color{red}Figure~\ref{fig:Person Status}}). 
+Thus, the system is not only able to determine which vision task modules to be assembled into action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$, it can also select one specific approach under a vision task module, based on question and preference. The preference term is described in the next section. \looseness=-1
 
 
 \subsubsection{Time and Accuracy Term}
@@ -150,7 +150,8 @@ Thus, the system is not only able to determine whether resemble a vision task mo
 \end{equation}
 \end{small}
 
-\noindent where \kw{a_{i}} is the action will take, based on current status. $\pi(\cdot)$ is the policy function that maps status to actions, here, the policy is the probability of outputing next action module $\kw{a_{i}}$ based on current status. And $\ell(\cdot)$ here is the softmax loss based on the whole action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. Since all actions are discrete, which leads to non-differentiable, and back-propagation cannot be used. Policy gradient~\cite{Liu_2017_ICCV} is used here during training. The object function now becomes the combination of policy gradient loss $L_{policy}(\theta)$ with the time-accuracy-balanced loss $L_{\tau\alpha}$, and optimize it by backpropagation for $L_{\tau\alpha}$, while policy gradient for $L_{policy}(\theta)$.
+\noindent where \kw{a_{i}} is the action taken based on current status. $\pi(\cdot)$ is the policy function that maps status to actions, here, the policy is the probability of outputting next action module $\kw{a_{i}}$ based on current status. And $\ell(\cdot)$ here is the softmax loss based on the whole action module sequence $[\kw{a}_1,\kw{a}_2,\kw{a}_3,\dots,\kw{a}_n]$. Since all actions are discrete, which leads to non-differentiable, back-propagation will not work. Policy gradient~\cite{Liu_2017_ICCV} is used instead during training. The object function now becomes the combination of policy gradient loss $L_{policy}(\theta)$ and the time-accuracy-balanced loss $L_{\tau\alpha}$, with $L_{\tau\alpha}$ optimized via backpropagation and $L_{policy}(\theta)$ optimized via policy gradient. 
+%and optimize it by backpropagation for $L_{\tau\alpha}$, while policy gradient for $L_{policy}(\theta)$.
 
 
 
